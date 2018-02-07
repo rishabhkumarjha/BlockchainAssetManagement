@@ -20,7 +20,11 @@ geth --port 3000 --networkid 1 --datadir blockchain/ --maxpeers=5 --rpc --rpcpor
 8. truffle migrate
 9. npm run dev
   
+# creating multi peer private blockchain network
+  * run command "admin" on geth console and copy the enode
+  * on the other system's geth console type "admin.addPeer(<enode copied from other system, replace [::] with the ip address of that system>)"
+  * to check if the peer has been connected run admin.peers and it should show the new peer
+  * dont forget to create new account if first time and start miner by miner.start(n) n is number of thready you want miner to run on
 # troubleshoot
   if you do not have enough ether to buy a property transfer some to the account in your metamask from geth command
-  "eth.sendTransaction({"from":eth.coinbase,"to":<metamask account no.>,"value":10000000000000000})
-
+  "eth.sendTransaction({"from":eth.coinbase,"to":<metamask account no.>,"value":10000000000000000})"
