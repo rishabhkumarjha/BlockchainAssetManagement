@@ -26,5 +26,7 @@ geth --port 3000 --networkid 1 --datadir blockchain/ --maxpeers=5 --rpc --rpcpor
   * to check if the peer has been connected run admin.peers and it should show the new peer
   * dont forget to create new account if first time and start miner by miner.start(n) n is number of thready you want miner to run on
 # troubleshoot
-  if you do not have enough ether to buy a property transfer some to the account in your metamask from geth command
+  * if you do not have enough ether to buy a property transfer some to the account in your metamask from geth command
   "eth.sendTransaction({"from":eth.coinbase,"to":<metamask account no.>,"value":10000000000000000})"
+  * npm permission issues : use sudo, you may also have to execute "npm install lite-server"
+  * npm install lite-server installs required node-modules to the current directory
