@@ -14,10 +14,11 @@ Admin = {
         document.getElementById('coinbase').innerText = Admin.web3.eth.coinbase;
         document.getElementById('coinbase_balance').innerText = Admin.coinbase_balance;
         document.getElementById('peers').innerText = Admin.web3.net.peerCount;
-        
+        document.getElementById('currblock').innerText= Admin.web3.eth.blockNumber;
     }
 
 }
+
 
 function getBlock(){
     //alert("hi")
@@ -33,6 +34,10 @@ function getBlock(){
     document.getElementById('block').innerHTML += "Transactions : " + block.transactions +'<br>';
     document.getElementById('block').innerHTML += "Timestamp : " + block.timestamp +'<br>';
     document.getElementById('block').innerHTML += "Size : " + block.size +'<br>';
+
+	
+    //document.getElementById('blockno').innerHTML = Admin.web3.eth.getBlockNumber();
+console.log(Admin.web3.eth.getBlockNumber())
     console.log(Admin.web3.eth.getBlock(block_no)); 
 }
 
