@@ -30,3 +30,5 @@ geth --port 3000 --networkid 1 --datadir blockchain/ --maxpeers=5 --rpc --rpcpor
   "eth.sendTransaction({"from":eth.coinbase,"to":<metamask account no.>,"value":10000000000000000})"
   * npm permission issues : use sudo, you may also have to execute "npm install lite-server"
   * npm install lite-server installs required node-modules to the current directory
+# Windows (Instructions To Run)
+  * instead of using "truffle compile" and "truffle migrate" use "truffle.cmd compile" and "truufle.cmd migrate"
