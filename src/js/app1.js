@@ -80,9 +80,12 @@ App.handle.addProperty(document.getElementById("owner_addr").value,
 
 function onButtonBuy()
 {
+    /*var event=App.handle.checkLease();
+    event.watch(function(error,result){if (!error)
+        console.log(result);});*/
     var account;
     var owner=null;
-    var prop_id = document.getElementById("prop_id").value
+    var prop_id = document.getElementById("prop_id").value;
     web3.eth.getAccounts(function(error, accounts) 
     {
       if (error) 
@@ -97,17 +100,39 @@ function onButtonBuy()
         {
           owner=addr;
           console.log(addr);
-          App.handle.buyProperty(owner,account,prop_id,{from:owner})
+          App.handle.buyProperty(owner,account,prop_id,{from:account,to:owner})
             .then(function(bool)
               {
-                console.log(Boolean(bool) + "transaction completed");
+                console.log(Boolean(bool) + " transaction completed");
                 App.handle.getAddress.call(prop_id)
-                  .then(function(addr){console.log(addr);})
+                  .then(function(addr){console.log("Property transferred to " + addr);})
 
               }
             )
         }
         );
+}
+
+function onButtonLease()
+{
+  var account,owner;
+  var prop_id = document.getElementById("prop_id").value;
+  web3.eth.getAccounts(function(error, accounts) 
+    {
+      if (error) 
+      {
+        console.log(error);
+      }
+
+      account = accounts[0];  //renter
+    })
+  App.handle.getAddress.call(prop_id)
+      .then(function(addr)
+      {
+        owner=addr;
+        App.handle.leaseProperty()
+      })
+
 }
 
 
