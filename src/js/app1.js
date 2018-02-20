@@ -115,10 +115,12 @@ function onButtonBuy()
 
 function onButtonLease()
 {
-  var account,owner;
-  var property_id = document.getElementById("property_id").value;
-  var property_id = document.getElementById("property_id").value;
-
+  var account,owner,timeOut;
+  var prop_id = document.getElementById("property_id").value;
+  var years = document.getElementById("years").value;
+  var weeks = document.getElementById("weeks").value;
+  var days = document.getElementById("days").value;
+  timeOut=years*3600+weeks*60+days*1;
   web3.eth.getAccounts(function(error, accounts) 
     {
       if (error) 
@@ -127,14 +129,81 @@ function onButtonLease()
       }
 
       account = accounts[0];  //renter
-    })
-  App.handle.getAddress.call(property_id)
+    });
+
+  App.handle.getAddress.call(prop_id)
       .then(function(addr)
       {
         owner=addr;
-        //App.handle.leaseProperty()
+        console.log("Reaches just before the func start");
+        App.handle.leasePropertyStart(owner,account,prop_id,years,weeks,days,{from:account})
+            .then(function(result)
+            {
+               
+                console.log("timeout="+timeOut);
+                App.handle.getAddress.call(prop_id)
+                  .then(function(addr){console.log("Property leased to "+addr);})
+
+                
+
+            })
+              var checker=setTimeout(forChecker.bind(null,owner,account,prop_id),timeOut*1000);
+      });
+
+    /*var eventVar=App.handle.checkLease();
+    eventVar.watch(function(error,result)
+    {
+      if(!error)
+      {
+        console.log("property id= "+result.args.prop_id);
+        console.log("contract_end= "+result.args.contract_end);
+        App.handle.leasePropertyEnd(owner,account,prop_id,{from:account,to:owner})
+        .then(function(result)
+        {
+            App.handle.getAddress.call(prop_id)
+                  .then(function(addr){console.log("Property with "+prop_id+" NOW belongs to "+addr);})
+        })
+      }
+    })*/
+    
+
+}
+
+function forChecker(owner,account,p)  
+{
+  alert("in checker");
+  console.log(owner);
+  console.log(account);
+  console.log(p);
+  /*var p=document.getElementById("prop_id_lease_prop").value;
+    var owner=0xf17f52151EbEF6C7334FAD080c5704D77216b732;
+    var renter=0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef;
+   
+
+   App.handle.getAddress.call(p)
+      .then(function(addr)
+      {
+        renter=addr;
+        console.log("renter="+renter);
       })
 
+  App.handle.getOldOwner.call(p)
+    .then(function(addr1)
+    {
+      owner=addr1;
+      console.log("owner="+owner);
+    })*/
+  App.handle.leasePropertyEnd(owner,p)
+    .then(function(result)
+    {
+      App.handle.getAddress.call(p)
+        .then(function(addr)
+        {
+          console.log("Lease period expired! Property "+p+" belongs to "+addr);
+        })
+    })
+
+    alert("func ends");
 }
 
 function setupBuy(){
