@@ -11,8 +11,8 @@ function viewDetails() {
    //console.log(snapshot.val());
    document.getElementById('propertySrc').src=propertyObject.picture;
    document.getElementById('overviewParameter').innerHTML = propertyObject.overview;
-   document.getElementById('propertyTitle').innerHTML = propertyObject.name;
-   document.getElementById('type').innerHTML = propertyObject.age;
+   document.getElementById('propertyTitle').innerHTML = propertyObject.title;
+   document.getElementById('type').innerHTML = propertyObject.plan.type;
    document.getElementById('area').innerHTML = propertyObject.plan.area;
    document.getElementById('rate').innerHTML = propertyObject.plan.rate;
    document.getElementById('total').innerHTML = propertyObject.plan.total;

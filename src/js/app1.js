@@ -215,6 +215,8 @@ function setupBuy(){
   text_field.id="property_id"
   text_field.type="text"
   text_field.placeholder="Property ID"
+  text_field.value="PropertyID : " + propertyObject.id;
+  text_field.disabled=true;
   console.log(create_textfields)
   console.log(text_field)
   create_textfields.appendChild(text_field);
@@ -241,6 +243,7 @@ function setupRegister(){
   text_field1.id="property_id"
   text_field1.type="text"
   text_field1.placeholder="Property ID"
+
   create_textfields.appendChild(text_field1);
 
   var button = document.createElement("button")
@@ -263,6 +266,8 @@ function setupLease(){
   text_field.id="property_id"
   text_field.type="text"
   text_field.placeholder="Property ID"
+  text_field.value="PropertyID : " + propertyObject.id;
+  text_field.disabled=true;
   create_textfields.appendChild(text_field);
 
   document.getElementById("time").innerHTML+='<div class="medium-4 column"><input type=text id=years placeholder="No of years"></div><div class="medium-4 column"><input type=text id=weeks placeholder="No of weeks"></div><div class="medium-4 column"><input type=text id=days placeholder="No of days"></div>'

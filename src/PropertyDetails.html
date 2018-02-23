@@ -191,12 +191,46 @@
 
     </div>
     
-    <div class="spacer"></div>
-
-    
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/app.js"></script>
+
+<!-- radio button option-->
+      <br><br>
+      <div class="row">
+      <div class="medium-6 medium-centered columns">
+        <div class="medium-12 medium-centered column">
+        <fieldset>
+          <input type="radio" onclick="setupBuy()" name="action" value="buy" id="buy_radio"><label for="buy_radio">Buy Property</label>
+          <input type="radio" onclick="setupLease()" name="action" value="rent" id="rent_radio"><label for="rent_radio">Rent Property</label>
+        </fieldset>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="medium-6 medium-centered columns" id="container">
+        <div class="medium-12 column" id="text_fields">
+          
+        </div>
+        <div id="time">
+        </div>
+        <div id="button_container" class="medium-12 column">
+        </div>
+      </div>
+    </div>
+    
+    <div class="spacer"></div>
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="js/foundation.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app1.js"></script>
+
   </body>
 </html>
