@@ -11,11 +11,11 @@ App = {
       var petTemplate = $('#petTemplate');
 
       for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
+        petTemplate.find('.panel-title').text(data[i].title);
         petTemplate.find('img').attr('src', data[i].picture);
         //petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-type').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
+        petTemplate.find('.pet-type').text(data[i].plan.type);
+        petTemplate.find('.pet-location').text(data[i].location.street + ", " + data[i].location.city);
         petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
         petTemplate.find('.btn-details').attr('onclick','onDetailsClick('+i+')');
         petsRow.append(petTemplate.html());
