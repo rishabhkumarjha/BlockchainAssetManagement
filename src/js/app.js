@@ -1,3 +1,4 @@
+var property_data;
 App = {
   web3Provider: null,
   contracts: {},
@@ -5,6 +6,7 @@ App = {
   init: function() {
     // Load pets.
     $.getJSON('../pets.json', function(data) {
+      property_data = data;
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
 
@@ -15,6 +17,7 @@ App = {
         petTemplate.find('.pet-type').text(data[i].age);
         petTemplate.find('.pet-location').text(data[i].location);
         petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
+        petTemplate.find('.btn-details').attr('onclick','onDetailsClick('+i+')');
         petsRow.append(petTemplate.html());
       }
     });
@@ -107,8 +110,19 @@ web3.eth.getAccounts(function(error, accounts) {
 
 };
 
+function onDetailsClick(identity){
+  console.log(identity);
+  document.cookie = identity+"";
+  window.location.href="http://localhost:3000/PropertyDetails.html"
+
+}
+
+
+
 $(function() {
   $(window).load(function() {
     App.init();
   });
 });
+
+

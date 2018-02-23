@@ -248,6 +248,10 @@ function setupRegister(){
   button.innerHTML="Register Property"
   button.setAttribute("onclick","onButtonAdd()");
   document.getElementById("button_container").appendChild(button);
+
+  $(function(){
+    $('#container').load('/home/anand/foundation/WebDevelopment/getPropertyDetails.html');
+  });
 }
 
 function setupLease(){
