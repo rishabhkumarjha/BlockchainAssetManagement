@@ -14,7 +14,7 @@ App =
               App.web3Provider = web3.currentProvider;
             } else {
               // If no injected web3 instance is detected, fall back to Ganache
-              App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+              App.web3Provider = new Web3.providers.HttpProvider('http://192.168.1.101:8545');
             }
             App.web3 = new Web3(App.web3Provider);
 
@@ -105,7 +105,9 @@ function onButtonBuy()
               {
                 console.log(Boolean(bool) + " transaction completed");
                 App.handle.getAddress.call(property_id)
-                  .then(function(addr){console.log("Property transferred to " + addr);})
+                  .then(function(addr){console.log("Property transferred to " + addr);
+                                        alert("The property is transferred to"+ addr);
+                                      })
 
               }
             )
@@ -142,7 +144,9 @@ function onButtonLease()
                
                 console.log("timeout="+timeOut);
                 App.handle.getAddress.call(prop_id)
-                  .then(function(addr){console.log("Property leased to "+addr);})
+                  .then(function(addr){console.log("Property leased to "+addr);
+                                      alert("Property leased to "+addr+" for a period of "+years+" years "+weeks+" weeks "+days+" days ");
+                                    })
 
                 
 
@@ -171,7 +175,7 @@ function onButtonLease()
 
 function forChecker(owner,account,p)  
 {
-  alert("in checker");
+ //  alert("in checker");
   console.log(owner);
   console.log(account);
   console.log(p);
@@ -200,10 +204,11 @@ function forChecker(owner,account,p)
         .then(function(addr)
         {
           console.log("Lease period expired! Property "+p+" belongs to "+addr);
+          alert("Lease period expired! Property "+p+" belongs to "+addr)
         })
     })
 
-    alert("func ends");
+   
 }
 
 function setupBuy(){
