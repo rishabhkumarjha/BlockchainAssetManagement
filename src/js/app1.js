@@ -14,7 +14,7 @@ App =
               App.web3Provider = web3.currentProvider;
             } else {
               // If no injected web3 instance is detected, fall back to Ganache
-              App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+              App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
             }
             App.web3 = new Web3(App.web3Provider);
 
@@ -215,7 +215,7 @@ function setupBuy(){
   text_field.id="property_id"
   text_field.type="text"
   text_field.placeholder="Property ID"
-  text_field.value="PropertyID : " + propertyObject.id;
+  text_field.value=propertyObject.id;
   text_field.disabled=true;
   console.log(create_textfields)
   console.log(text_field)
@@ -266,7 +266,7 @@ function setupLease(){
   text_field.id="property_id"
   text_field.type="text"
   text_field.placeholder="Property ID"
-  text_field.value="PropertyID : " + propertyObject.id;
+  text_field.value=propertyObject.id;
   text_field.disabled=true;
   create_textfields.appendChild(text_field);
 
@@ -280,6 +280,39 @@ function setupLease(){
   document.getElementById("button_container").appendChild(button);
   //console.log(document.getElementById("button_container"))
 }
+
+function onButtonGetOwner()
+{
+  var prop_id=document.getElementById(  "prop_id_get_owner").value;
+
+
+  App.handle.getAddress.call(prop_id)
+    .then(function(addr)
+    {
+      console.log(prop_id+" = "+addr);
+    })
+}
+
+function onButtonGetCOC()
+{
+
+  //var prop_id=document.getElementById("propertyId").value;
+  var container = document.getElementById("container_timeline").innerHTML
+
+          App.handle.getChainOfCustody.call(document.cookie)
+    .then(function(properties)
+    {
+        //console.log(properties);
+        console.log(properties.length);
+        for(i=0;i<properties.length /*&& properties[i]!== '0x0000000000000000000000000000000000000000'*/;i++)
+        {
+          console.log(properties[i]);
+          document.getElementById("container_timeline").innerHTML += '<div class="container left"><div class="content">' + properties[i] + '</div></div>'
+        }
+    })
+
+}
+
 
 $(function() {
   $(window).load(function() {
