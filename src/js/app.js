@@ -5,7 +5,7 @@ App = {
 
   init: function() {
     // Load pets.
-    $.getJSON('../pets.json', function(data) {
+    $.getJSON('../Properties.json', function(data) {
       property_data = data;
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');

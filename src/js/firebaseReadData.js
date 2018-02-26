@@ -4,7 +4,7 @@ var lat;
 var lng;
 var property_data;
 var x = "t"
-$.getJSON('../pets.json', function(data) {
+$.getJSON('../Properties.json', function(data) {
       console.log("data"+data);
       x=data
       propertyObject = data[parseInt(document.cookie)];
