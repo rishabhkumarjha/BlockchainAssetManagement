@@ -97,6 +97,7 @@ function leasePropertyStart(address owner,address renter,uint prop_id,uint years
                 pid_to_old_owner[prop_id]=0x0000000000000000000000000000000000000000;
                 pid_to_address_map[prop_id]=owner;
                 pid_to_rented_map[prop_id]=false;
+                chain_of_custody[prop_id].push(owner);
 /*                pid_to_noOfOwners[prop_id]--;
                 delete chain_of_custody[prop_id][pid_to_noOfOwners[prop_id]];*/
         

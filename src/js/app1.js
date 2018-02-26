@@ -106,7 +106,7 @@ function onButtonBuy()
                 console.log(Boolean(bool) + " transaction completed");
                 App.handle.getAddress.call(property_id)
                   .then(function(addr){console.log("Property transferred to " + addr);
-                                        alert("The property is transferred to"+ addr);
+                                        alert("The property is transferred to "+ addr);
                                       })
 
               }
@@ -294,6 +294,7 @@ function onButtonGetOwner()
   App.handle.getAddress.call(prop_id)
     .then(function(addr)
     {
+      alert(prop_id+"  ==>>  "+addr);
       console.log(prop_id+" = "+addr);
     })
 }
