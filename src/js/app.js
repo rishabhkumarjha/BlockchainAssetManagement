@@ -112,8 +112,9 @@ web3.eth.getAccounts(function(error, accounts) {
 
 function onDetailsClick(identity){
   console.log(identity);
+  document.cookie = "";
   document.cookie = identity+"";
-  window.location.href="http://localhost:3000/PropertyDetails.html"
+  window.location.href="./PropertyDetails.html"
 
 }
 
