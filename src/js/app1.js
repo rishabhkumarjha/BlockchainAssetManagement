@@ -100,7 +100,7 @@ function onButtonBuy()
         {
           owner=addr;
           console.log(addr);
-          App.handle.buyProperty(owner,account,property_id,{from:account,to:owner})
+          App.handle.buyProperty(owner,account,property_id)
             .then(function(bool)
               {
                 console.log(Boolean(bool) + " transaction completed");
@@ -297,6 +297,12 @@ function onButtonGetOwner()
       alert(prop_id+"  ==>>  "+addr);
       console.log(prop_id+" = "+addr);
     })
+}
+
+
+function onPageLoad()
+{
+    setTimeout(onButtonGetCOC.bind(),1000);
 }
 
 function onButtonGetCOC()
