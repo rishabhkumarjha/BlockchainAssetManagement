@@ -5,11 +5,10 @@ Admin = {
     coinbase_balance:null,
     init:function(){
         //Admin.web3Provider = web3.currentProvider;
-<<<<<<< HEAD
+
         Admin.web3Provider = new Web3.providers.HttpProvider('http://192.168.43.253:8545');
-=======
+
         Admin.web3Provider = new Web3.providers.HttpProvider('http://192.168.43.58:8545');
->>>>>>> b394d5eedaf087fc4bb0adc32b417b9996ee5de4
         Admin.web3 = new Web3(Admin.web3Provider);
         //var admin_console = $('disp');
         console.log(Admin.web3);
