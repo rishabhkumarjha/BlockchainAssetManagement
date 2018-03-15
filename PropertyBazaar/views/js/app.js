@@ -1,12 +1,14 @@
 var property_data;
-App = {
+App1 = {
   web3Provider: null,
   contracts: {},
 
   init: function() {
     // Load pets.
+
     $.getJSON('../Properties.json', function(data) {
       property_data = data;
+      console.log("init")
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
 
@@ -22,22 +24,22 @@ App = {
       }
     });
 
-    return App.initWeb3();
+    return App1.initWeb3();
   },
 
   initWeb3: function() {
     
     // Is there an injected web3 instance?
 if (typeof web3 !== 'undefined') {
-  App.web3Provider = web3.currentProvider;
+  App1.web3Provider = web3.currentProvider;
 } else {
   // If no injected web3 instance is detected, fall back to Ganache
-  App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+  App1.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
 }
-web3 = new Web3(App.web3Provider);
+web3 = new Web3(App1.web3Provider);
 
 
-    return App.initContract();
+    return App1.initContract();
   },
 
   initContract: function() {
@@ -45,27 +47,27 @@ web3 = new Web3(App.web3Provider);
     $.getJSON('./build/contracts/Adoption.json', function(data) {
   // Get the necessary contract artifact file and instantiate it with truffle-contract
   var AdoptionArtifact = data;
-  App.contracts.Adoption = TruffleContract(AdoptionArtifact);
+  App1.contracts.Adoption = TruffleContract(AdoptionArtifact);
 
   // Set the provider for our contract
-  App.contracts.Adoption.setProvider(App.web3Provider);
+  App1.contracts.Adoption.setProvider(App1.web3Provider);
 
   // Use our contract to retrieve and mark the adopted pets
-  return App.markAdopted();
+  return App1.markAdopted();
 });
 
-    return App.bindEvents();
+    return App1.bindEvents();
   },
 
   bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+    $(document).on('click', '.btn-adopt', App1.handleAdopt);
   },
 
   markAdopted: function(adopters, account) {
     
     var adoptionInstance;
 
-App.contracts.Adoption.deployed().then(function(instance) {
+App1.contracts.Adoption.deployed().then(function(instance) {
   adoptionInstance = instance;
 
   return adoptionInstance.getAdopters.call();
@@ -95,13 +97,13 @@ web3.eth.getAccounts(function(error, accounts) {
 
   var account = accounts[0];
 
-  App.contracts.Adoption.deployed().then(function(instance) {
+  App1.contracts.Adoption.deployed().then(function(instance) {
     adoptionInstance = instance;
 
     // Execute adopt as a transaction by sending account
     return adoptionInstance.adopt(petId, {from: account});
   }).then(function(result) {
-    return App.markAdopted();
+    return App1.markAdopted();
   }).catch(function(err) {
     console.log(err.message);
   });
@@ -122,7 +124,7 @@ function onDetailsClick(identity){
 
 $(function() {
   $(window).load(function() {
-    App.init();
+    App1.init();
   });
 });
 
