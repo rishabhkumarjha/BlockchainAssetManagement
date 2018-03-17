@@ -24,22 +24,27 @@
           	<div class = "small-6 small-centered columns">
             	<h1>Property Details</h1>
             </div>
-          </div>
+          </div >
 
-          <form>
+          <form action="/getPropertyDetails" method = "post">
         <div class = "columns medium-6">
           <label>Propery Id</label>
-          <input id = "propertyId" type="text" placeholder="Property ID">
+          <input name = "id" type="text" placeholder="Property ID">
         </div>
 
         <div class = "columns medium-6">
           <label>Property Title</label>
-          <input id = "propertyTitle" type="text" placeholder="Property Title">
+          <input name = "title" type="text" placeholder="Property Title">
+        </div>
+
+        <div class = "columns medium-12">
+          <label>Overview</label>
+          <input name = "overview" type="text" />
         </div>
 
         <div class = "columns medium-6">
           <label>Type</label>
-          <select id = "type">
+          <select name = "type">
   			<option value="1 BHK">1 BHK</option>
   			<option value="2 BHK">2 BHK</option>
   			<option value="3 BHK">3 BHK</option>
@@ -50,32 +55,32 @@
 
         <div class = "columns medium-6">
           <label>Carpet Area (Sq.Ft.)</label>
-          <input id = "area" type = "number" placeholder="Carpet Area (Sq.Ft.)">
+          <input name= "area" type = "number" placeholder="Carpet Area (Sq.Ft.)">
         </div>
 
         <div class = "columns medium-6">
           <label>Rate Per Sq.Ft.</label>
-          <input id = "rate" type = "number" placeholder="Rate Per Sq.Ft.">
+          <input name = "rate" type = "number" placeholder="Rate Per Sq.Ft.">
         </div>
 
         <div class = "columns medium-6">
           <label>Total Cost</label>
-          <input id = "total" type = "number" placeholder="Total Cost">
+          <input name = "total" type = "number" placeholder="Total Cost">
         </div>
 
         <fieldset class="fieldset">
           <legend>Location</legend>
           <div class = "columns medium-4">
           	<label>Street</label>
-          	<input id = "street" type="text" placeholder="Street">
+          	<input name = "street" type="text" placeholder="Street">
           </div>
           <div class = "columns medium-4">
           	<label>City</label>
-          	<input id = "city" type="text" placeholder="City">
+          	<input name = "city" type="text" placeholder="City">
           </div>
           <div class = "columns medium-4">
           	<label>State</label>
-          	<input id = "state" type="text" placeholder="State">
+          	<input name = "state" type="text" placeholder="State">
           </div>
         </fieldset>
 
@@ -84,63 +89,70 @@
           <legend>Amenities</legend>
           <div class = "columns medium-3">
           	<label>24 Hr Water Supply</label>
-          	<input type="checkbox">
+          	<input name = "24-hour-water-supply" type="checkbox">
           </div>
           <div class = "columns medium-3">
-          	<label> 24 Hr Security</label>
-          	<input type="checkbox">
+          	<label>24 Hr Security</label>
+          	<input name = "24-hour-security" type="checkbox">
           </div>
           <div class = "columns medium-3">
           	<label>Club House</label>
-          	<input type="checkbox">
+          	<input name = "club-house" type="checkbox">
           </div>
+
+          <div class = "columns medium-6">
+          	<label>Firefighting Equipment</label>
+          	<input name = "fire-fighting-equipment" type="checkbox">
+          </div>
+
           <div class = "columns medium-3">
           	<label>Kid's Play Area </label>
-          	<input type="checkbox">
+          	<input name = "kids-play-ground" type="checkbox">
           </div>
           <div class = "columns medium-3">
           	<label>Wifi Connectivity</label>
-          	<input type="checkbox">
+          	<input name = "Wifi Connectivity" type="checkbox">
           </div>
 
           <div class = "columns medium-3">
           	<label>Meditation Center</label>
-          	<input type="checkbox">
+          	<input name = "Meditation Center" type="checkbox">
           </div>
 
           <div class = "columns medium-3">
           	<label>Senior Citizen Park </label>
-          	<input type="checkbox">
+          	<input name = "Senior Citizen Park" type="checkbox">
           </div>
           <div class = "columns medium-3">
           	<label>Power Backup</label>
-          	<input type="checkbox">
+          	<input name = "Power Backup" type="checkbox">
           </div>
           <div class = "columns medium-6">
           	<label>Jogging Amenities</label>
-          	<input type="checkbox">
+          	<input name = "Jogging Amenities" type="checkbox">
           </div>
-          <div class = "columns medium-6">
-          	<label>Firefighting Equipment</label>
-          	<input type="checkbox">
-          </div>
+
         </fieldset>
 
 
 
         <div class="columns medium-6">
-        	<button id = "submitButton" class="button expanded large" onClick ="firebaseWriteData()">Button</button>
+        	<button id = "submitButton" class="button expanded large">Submit</button>
         </div>
     </form>
 
 
-    </div> 	
+    </div>
     <div class="spacer"></div>
 
-    <script src="./js/firebaseWriteData.js"></script>
   	<script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/app1.js"></script>
+   
+    
+
+
   </body>
  </html>

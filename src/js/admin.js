@@ -8,7 +8,7 @@ Admin = {
         //Admin.web3Provider = web3.currentProvider;
 
 
-        Admin.web3Provider = new Web3.providers.HttpProvider('http://192.168.43.164:8545');
+        Admin.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
 
         Admin.web3 = new Web3(Admin.web3Provider);
         //var admin_console = $('disp');

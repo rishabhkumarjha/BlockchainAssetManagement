@@ -1,10 +1,10 @@
 App =
 {
-
+    handle: null,
     web3Provider: null,
       contracts: {},
       web3:null,
-      handle: null,
+      
 
        initWeb3: function() 
        {
@@ -14,7 +14,7 @@ App =
               App.web3Provider = web3.currentProvider;
             } else {
               // If no injected web3 instance is detected, fall back to Ganache
-              App.web3Provider = new Web3.providers.HttpProvider('http://192.168.1.101:8545');
+              App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545');
             }
             App.web3 = new Web3(App.web3Provider);
 
@@ -25,7 +25,7 @@ App =
       initContract: function() 
       {
     
-            $.getJSON('Adoption.json', function(data) {
+            $.getJSON('./build/contracts/Adoption.json', function(data) {
           // Get the necessary contract artifact file and instantiate it with truffle-contract
           var AdoptionArtifact = data;
           App.contracts.Adoption = TruffleContract(AdoptionArtifact);
@@ -50,33 +50,49 @@ App =
 
 function onButtonAdd()
 {
-    alert("in onButtonClick");
+   //alert("in onButtonAdd");
+    var x = "t";
+    var prop_id;
     var account;
-
+   $.getJSON('../Properties.json', function(data) 
+   {
+      x=data;
+      prop_id=x[x.length-1].id;
+    //console.log(account);
+    
+      /*propertyObject = data[parseInt(document.cookie)];
+      console.log(propertyObject);*/
     web3.eth.getAccounts(function(error, accounts) {
-  if (error) {
-    console.log(error);
-  }
+          if (error) {
+            console.log(error);
+          }
+           account = accounts[0];
+           console.log(account);
+           console.log(prop_id);
+           App.handle.addProperty(account,prop_id,{from: account})
+                                  .then(function(result)
+                                  {
+                                    if(Boolean(result)==true)
+                                    {
+                                      App.handle.getAddress.call(prop_id)
+                                      .then(function(addr){alert("The property is registered with user "+addr);})
+                                    }
+                                    else
+                                    {
+                                      App.handle.getAddress.call(prop_id)
+                                      .then(function(addr){alert("The property is already registered under user "+addr);})
+                                    }
+                                  })
+                                      
 
-  account = accounts[0];
-  //console.log(account);
-  
-
-App.handle.addProperty(document.getElementById("owner_address").value,
-                                  document.getElementById("property_id").value,{from:account})
-                                  .then(function(result){
-                                      return App.handle.getAddress.call(document.getElementById("property_id").value)})
-                                      .then(function(addr){console.log(addr);})
+ });
+    
+    });
 
 
+ 
+}
 
-});
-
-  
-  
-
-    //App.contracts.addProperty(,,{from:account})
-    }
 
 function onButtonBuy()
 {
@@ -95,6 +111,7 @@ function onButtonBuy()
 
       account = accounts[0];
     })
+	console.log(App.handle.getAddress.call(property_id));
     App.handle.getAddress.call(property_id)
       .then(function(addr)
         {
@@ -234,7 +251,7 @@ function setupBuy(){
 }
 
 function setupRegister(){
-  var create_textfields = document.getElementById("text_fields");
+/*  var create_textfields = document.getElementById("text_fields");
   create_textfields.innerHTML=""
   document.getElementById("time").innerHTML=""
   document.getElementById("button_container").innerHTML=""
@@ -259,7 +276,9 @@ function setupRegister(){
 
   $(function(){
     $('#container').load('/home/anand/foundation/WebDevelopment/getPropertyDetails.html');
-  });
+  });*/
+
+
 }
 
 function setupLease(){

@@ -50,7 +50,7 @@ App =
 
 function onButtonAdd()
 {
-   alert("in onButtonAdd");
+   //alert("in onButtonAdd");
     var x = "t";
     var prop_id;
     var account;

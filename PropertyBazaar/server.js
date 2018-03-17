@@ -99,7 +99,18 @@ console.log(currentSearchResult);
 fs.readFile('./views/Properties.json', function (err, data) {
     var json = JSON.parse(data)
     //console.log(json)
-    json.push(currentSearchResult)
+   /* for(var i=0;i<data.length;i++)			
+    {
+    	if(currentSearchResult.id==data[i].id)
+    	{
+    		//alert("The property with ID "+data[i].id+" is already registered");
+    		break;
+    	}
+    	else if(i==data.length)
+    		json.push(currentSearchResult);
+    }*/
+    
+    json.push(currentSearchResult);
     //console.log(json)
     fs.writeFile('./views/Properties.json', JSON.stringify(json))
 })

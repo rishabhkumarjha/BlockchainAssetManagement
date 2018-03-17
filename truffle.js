@@ -3,7 +3,7 @@ module.exports = {
   // for more about customizing your Truffle configuration!
   networks: {
     development: {
-      host: "192.168.43.253",
+      host: "192.168.43.164",
       port: 8545,
       network_id: "1", // Match any network id
       gas: 2001952
