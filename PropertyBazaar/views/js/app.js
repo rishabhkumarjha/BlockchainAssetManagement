@@ -28,6 +28,7 @@ App1 = {
   },
 
   initWeb3: function() {
+    console.log("app initWeb3");
     
     // Is there an injected web3 instance?
 if (typeof web3 !== 'undefined') {
@@ -44,14 +45,14 @@ web3 = new Web3(App1.web3Provider);
 
   initContract: function() {
     
-    $.getJSON('./build/contracts/Adoption.json', function(data) {
+    $.getJSON('../build/contracts/Adoption.json', function(data) {
   // Get the necessary contract artifact file and instantiate it with truffle-contract
   var AdoptionArtifact = data;
   App1.contracts.Adoption = TruffleContract(AdoptionArtifact);
 
   // Set the provider for our contract
   App1.contracts.Adoption.setProvider(App1.web3Provider);
-
+  console.log("app initContract");
   // Use our contract to retrieve and mark the adopted pets
   return App1.markAdopted();
 });

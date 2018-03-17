@@ -25,7 +25,7 @@ App =
       initContract: function() 
       {
     
-            $.getJSON('./build/contracts/Adoption.json', function(data) {
+            $.getJSON('../build/contracts/Adoption.json', function(data) {
           // Get the necessary contract artifact file and instantiate it with truffle-contract
           var AdoptionArtifact = data;
           App.contracts.Adoption = TruffleContract(AdoptionArtifact);
@@ -69,7 +69,7 @@ function onButtonAdd()
            account = accounts[0];
            console.log(account);
            console.log(prop_id);
-           App.handle.addProperty(account,prop_id,{from: account})
+           App.handle.addProperty(account,prop_id/*,{from: account}*/)
                                   .then(function(result)
                                   {
                                     if(Boolean(result)==true)
