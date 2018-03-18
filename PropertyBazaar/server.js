@@ -102,7 +102,7 @@ fs.readFile('./views/Properties.json', function (err, data) {
     //console.log(json)
     fs.writeFile('./views/Properties.json', JSON.stringify(json))
 })
-next.render('index.ejs')
+response.render('index.ejs')
 })
 
 
