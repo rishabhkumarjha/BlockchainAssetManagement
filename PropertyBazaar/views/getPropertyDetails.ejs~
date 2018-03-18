@@ -29,12 +29,12 @@
           <form action="/getPropertyDetails" method = "post">
         <div class = "columns medium-6">
           <label>Propery Id</label>
-          <input name = "id" type="text" placeholder="Property ID">
+          <input name = "id" type="text" placeholder="Property ID" required>
         </div>
 
         <div class = "columns medium-6">
           <label>Property Title</label>
-          <input name = "title" type="text" placeholder="Property Title">
+          <input name = "title" type="text" placeholder="Property Title" required>
         </div>
 
         <div class = "columns medium-12">
@@ -72,15 +72,15 @@
           <legend>Location</legend>
           <div class = "columns medium-4">
           	<label>Street</label>
-          	<input name = "street" type="text" placeholder="Street">
+          	<input name = "street" type="text" placeholder="Street" required>
           </div>
           <div class = "columns medium-4">
           	<label>City</label>
-          	<input name = "city" type="text" placeholder="City">
+          	<input name = "city" type="text" placeholder="City" required>
           </div>
           <div class = "columns medium-4">
           	<label>State</label>
-          	<input name = "state" type="text" placeholder="State">
+          	<input name = "state" type="text" placeholder="State" required>
           </div>
         </fieldset>
 
