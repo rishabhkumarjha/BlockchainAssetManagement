@@ -24,9 +24,10 @@ router.get('/',function(request,response,next){
 })
 
 
-
 var fs = require('fs')
-
+process.on('uncaughtException', function (exception) {
+  console.log(exception); // to see your exception details in the console
+});
 
 var fname;
 var lname;
@@ -141,6 +142,9 @@ app.get('*',function(reuest,response,next){
 	response.send("404 Page Not Found")
 })
 */
+
+
+
 
 app.listen(12345, function(){
 	console.log("App is running on port " + 12345)
