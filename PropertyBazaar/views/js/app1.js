@@ -60,8 +60,8 @@ function onButtonAdd()
       prop_id=x[x.length-1].id;
     //console.log(account);
     
-      /*propertyObject = data[parseInt(document.cookie)];
-      console.log(propertyObject);*/
+      propertyObject = data[parseInt(document.cookie)];
+      console.log(propertyObject);
     web3.eth.getAccounts(function(error, accounts) {
           if (error) {
             console.log(error);
@@ -115,8 +115,20 @@ function onButtonBuy()
     event.watch(function(error,result){if (!error)
         console.log(result);});*/
     var account;
+    var valINR=parseFloat(valINR);
+    var valEth=parseFloat(valEth);
     var owner=null;
     var property_id = document.getElementById("property_id").value;
+
+    $.getJSON('../Properties.json', function(data)
+    {
+
+        valINR=parseFloat(data[property_id].plan.total);
+        valEth=parseFloat((valINR /40300)/*.toFixed(2)*/);
+        console.log(valINR);
+        console.log(valEth);
+    });
+
     web3.eth.getAccounts(function(error, accounts) 
     {
       if (error) 
@@ -157,7 +169,7 @@ function onButtonBuy()
                 /*console.log(addr);*/
                 else
                 {
-                  App.handle.buyProperty(owner,account,property_id,{from:account,to:owner,value:web3.toWei(1,"ether")})
+                  App.handle.buyProperty(owner,account,property_id,{from:account,to:owner,value:web3.toWei(valEth,"ether")})
                   .then(function(bool)
                     {
                       console.log(Boolean(bool) + " transaction completed");
