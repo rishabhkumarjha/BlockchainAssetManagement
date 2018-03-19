@@ -28,7 +28,8 @@ router.get('/',function(request,response,next){
 var fs = require('fs')
 
 
-
+var fname;
+var lname;
 var propertyId;
 var propertyTitle;
 var propertyType;
@@ -58,11 +59,15 @@ router.post('/',function(request,response,next){
 	street = request.body.street;
 	city = request.body.city;
 	state = request.body.state;
+	fname= request.body.fname;
+	lname= request.body.lname;
 
 
 	var currentSearchResult = {
 	id : propertyId,
 	title : propertyTitle,
+	firstName : fname,
+	lastName : lname,
 	overview : overview,
 	picture : "images/p13.jpeg",
 	plan : {
