@@ -7,7 +7,13 @@ var x = "t"
 $.getJSON('../Properties.json', function(data) {
       console.log("data"+data);
       x=data
-      propertyObject = data[parseInt(document.cookie)];
+      var i
+      for(i = 0;i<data.length;i++){
+      	if(data[i].id==parseInt(document.cookie)){
+      		break
+      	}
+      }
+      propertyObject = data[i];
       console.log(propertyObject);
     });
 function viewDetails() {
@@ -25,7 +31,6 @@ function viewDetails() {
     console.log(lng);
 
 }
-
 
 function initMap() {
     var uluru = {lat : 18.509890,lng :73.807182}
