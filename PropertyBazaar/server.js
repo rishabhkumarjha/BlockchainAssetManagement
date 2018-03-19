@@ -2,12 +2,11 @@ var express = require('express')
 var logger = require('morgan')
 var bodyParser = require('body-parser')
 var router = express.Router();
-
+var router1 = express.Router();
 
 //create instance of express
 var app = express()
-
-app.set('view engine','html')
+app.set('view engine','ejs')
 
 app.use(express.static('views'))
 app.set('views', __dirname + '/views')
@@ -20,7 +19,7 @@ app.use(logger('dev'))
 //app.use(bodyParser())
 
 app.use('/getPropertyDetails',router)
-router.get('/',function(request,response){
+router.get('/',function(request,response,next){
 	response.render('getPropertyDetails.ejs')
 })
 
@@ -46,7 +45,7 @@ app.get('/',function(request,response){
 	response.render('index.ejs')
 })
 
-router.post('/',function(request,response){
+router.post('/',function(request,response,next){
 	console.log(request.body);
 	console.log(request.body.propertyId)
 	propertyId = request.body.id;
@@ -99,18 +98,7 @@ console.log(currentSearchResult);
 fs.readFile('./views/Properties.json', function (err, data) {
     var json = JSON.parse(data)
     //console.log(json)
-   /* for(var i=0;i<data.length;i++)			
-    {
-    	if(currentSearchResult.id==data[i].id)
-    	{
-    		//alert("The property with ID "+data[i].id+" is already registered");
-    		break;
-    	}
-    	else if(i==data.length)
-    		json.push(currentSearchResult);
-    }*/
-    
-    json.push(currentSearchResult);
+    json.push(currentSearchResult)
     //console.log(json)
     fs.writeFile('./views/Properties.json', JSON.stringify(json))
 })
@@ -119,7 +107,35 @@ response.render('index.ejs')
 
 
 //'/' is the home page or index page
+app.use('/PropertyDetails',router1)
+router1.get('/',function(request,response,next){
+	//console.log(request.params.id)
+	//var temp = request.params.id
+	//var responseObject
+	//fs.readFile('./views/Properties.json', function (err, data) {
+	  //  var js = JSON.parse(data)
+	    //console.log(json)
+			//console.log(json[request.params.id])
+			//var i
+			//for(i = 0;i<js.length;i++){
+				//console.log(js[i])
+				//if(js[i].id == temp){
+					//responseObject = js[i]
+					//break;
+				//}
+			//}
+			//responseObject = js[i]
+			//console.log(responseObject)
+			response.render('PropertyDetails.ejs')
 
+	//response.send(responseObject);
+});
+
+/*
+app.get('*',function(reuest,response,next){
+	response.send("404 Page Not Found")
+})
+*/
 
 app.listen(12345, function(){
 	console.log("App is running on port " + 12345)

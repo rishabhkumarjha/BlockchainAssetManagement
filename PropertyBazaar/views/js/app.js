@@ -19,7 +19,7 @@ App1 = {
         petTemplate.find('.pet-type').text(data[i].plan.type);
         petTemplate.find('.pet-location').text(data[i].location.street + ", " + data[i].location.city);
         petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-        petTemplate.find('.btn-details').attr('onclick','onDetailsClick('+i+')');
+        petTemplate.find('.btn-details').attr('onclick','onDetailsClick('+data[i].id+')');
         petsRow.append(petTemplate.html());
       }
     });
@@ -28,8 +28,7 @@ App1 = {
   },
 
   initWeb3: function() {
-    console.log("app initWeb3");
-    
+
     // Is there an injected web3 instance?
 if (typeof web3 !== 'undefined') {
   App1.web3Provider = web3.currentProvider;
@@ -44,15 +43,15 @@ web3 = new Web3(App1.web3Provider);
   },
 
   initContract: function() {
-    
-    $.getJSON('../build/contracts/Adoption.json', function(data) {
+
+    $.getJSON('./build/contracts/Adoption.json', function(data) {
   // Get the necessary contract artifact file and instantiate it with truffle-contract
   var AdoptionArtifact = data;
   App1.contracts.Adoption = TruffleContract(AdoptionArtifact);
 
   // Set the provider for our contract
   App1.contracts.Adoption.setProvider(App1.web3Provider);
-  console.log("app initContract");
+
   // Use our contract to retrieve and mark the adopted pets
   return App1.markAdopted();
 });
@@ -65,7 +64,7 @@ web3 = new Web3(App1.web3Provider);
   },
 
   markAdopted: function(adopters, account) {
-    
+
     var adoptionInstance;
 
 App1.contracts.Adoption.deployed().then(function(instance) {
@@ -117,8 +116,7 @@ function onDetailsClick(identity){
   console.log(identity);
   document.cookie = "";
   document.cookie = identity+"";
-  window.location.href="./PropertyDetails.html"
-
+  //window.location.href="http://localhost:12345/PropertyDetails/"+ identity +""
 }
 
 
@@ -128,5 +126,3 @@ $(function() {
     App1.init();
   });
 });
-
-

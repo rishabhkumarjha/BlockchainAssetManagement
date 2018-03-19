@@ -51,7 +51,9 @@
             <strong>Type</strong>: <span class="pet-type">3</span><br/>
             <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
             <!--<button class="btn btn-default btn-adopt" type="button" data-id="0">Buy</button>-->
-            <button class="btn btn-default btn-details" type="button" data-id="1">Details</button>
+            <form action = "/PropertyDetails" method = "get">
+            <button class="btn btn-default btn-details" type="submit" data-id="1">Details</button>
+            </form>
           </div>
         </div>
       </div>
@@ -65,6 +67,6 @@
     <script src="js/truffle-contract.js"></script>
     <script src="js/app.js"></script>
     <script src="js/app1.js"></script>
-    
+
   </body>
 </html>
