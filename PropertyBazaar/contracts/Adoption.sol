@@ -7,20 +7,42 @@ contract Adoption {
    mapping(uint=>bool) public pid_to_rented_map;
    mapping(uint=>address) public pid_to_old_owner;
    mapping(uint=>address[]) public chain_of_custody;
+
+   struct Name
+   {
+    string fname;
+    string lname;
+   }
+
+   mapping(address=>Name) public account_to_user_name;
   // mapping(uint=>uint) public pid_to_noOfOwners;
 
    //event checkLease(uint prop_id,uint indexed contract_end);
   
-function addProperty(address owner, uint propid) public returns (bool) {
+function addProperty(address owner, uint propid,string first_name,string last_name) public {
         if(pid_to_address_map[propid] == 0x0000000000000000000000000000000000000000){
             pid_to_address_map[propid]=owner;
             chain_of_custody[propid].push(owner);
+            var info=account_to_user_name[owner];
+            info.fname=first_name;
+            info.lname=last_name;
            // pid_to_noOfOwners[propid]=1;
             //address_to_pid_map[owner]=propid;
-            return true;
+            //return (account_to_user_name[owner].fname,account_to_user_name[owner].lname);
+           
         }
-        return false;
+        
     }
+
+function getUserFirstName(address addr) public view returns (string)
+{
+  return account_to_user_name[addr].fname;
+}
+
+function getUserLastName(address addr) public view returns (string)
+{
+  return account_to_user_name[addr].lname;
+}
 
 function getAddress(uint prop_id) public view returns (address)
 {

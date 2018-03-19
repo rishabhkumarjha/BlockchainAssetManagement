@@ -52,12 +52,17 @@ function onButtonAdd()
 {
    //alert("in onButtonAdd");
     var x = "t";
+    var first_name,last_name;
+    var temp; //gives the index of the prop_id in Properties.json
     var prop_id;
     var account;
    $.getJSON('../Properties.json', function(data) 
    {
       x=data;
-      prop_id=x[x.length-1].id;
+      temp=x.length-1;
+      prop_id=x[temp].id;
+      first_name=x[temp].firstName;
+      last_name=x[temp].lastName;
     //console.log(account);
     
       propertyObject = data[parseInt(document.cookie)];
@@ -75,7 +80,7 @@ function onButtonAdd()
            {
               if(addr1== '0x0000000000000000000000000000000000000000')
               {
-                  App.handle.addProperty(account,prop_id/*,{from: account}*/)
+                  App.handle.addProperty(account,prop_id,first_name,last_name,{from: account})
                                   .then(function(result)
                                   {
                                       App.handle.getAddress.call(prop_id)
@@ -114,7 +119,8 @@ function onButtonBuy()
     /*var event=App.handle.checkLease();
     event.watch(function(error,result){if (!error)
         console.log(result);});*/
-    var account,temp;
+    var account,temp;   //temp is the index of the property id in json
+    //var first_name, last_name;
     var valINR=parseFloat(valINR);
     var valEth=parseFloat(valEth);
     var owner=null;
@@ -134,6 +140,8 @@ function onButtonBuy()
         valEth=parseFloat((valINR /40300).toFixed(7));
         console.log(valINR);
         console.log(valEth);
+
+
     });
 
     web3.eth.getAccounts(function(error, accounts) 
@@ -201,7 +209,7 @@ App.handle.getAddress.call(property_id)
 
     else
     {
-      alert("Register your property on the BlockChain first!");
+      alert("This property is not yet registered on the blockchain!");
     }
 });
 
@@ -269,7 +277,7 @@ function onButtonLease()
 
     else
     {
-      alert("Register the property on the blockchain first!");
+      alert("This property is not yet registered on the blockchain!");
     }
   });
   
@@ -431,6 +439,8 @@ function onPageLoad()
 
 function onButtonGetCOC()
 {
+ 
+ var first_name, last_name;
 
   //var prop_id=document.getElementById("propertyId").value;
   var container = document.getElementById("container_timeline").innerHTML
@@ -441,9 +451,28 @@ function onButtonGetCOC()
         //console.log(properties);
         console.log(properties.length);
         for(i=0;i<properties.length /*&& properties[i]!== '0x0000000000000000000000000000000000000000'*/;i++)
-        {
+        {var first_name, last_name;
+          var string_name = "";
           console.log(properties[i]);
+           App.handle.getUserFirstName.call(properties[i])
+          .then(function(result)
+          {
+            first_name=result;
+            console.log(first_name);
+            string_name = first_name;
+            //document.getElementById("container_timeline").innerHTML += '<div class="container right"><div class="content">' + first_name + '</div></div>'
+          });
+
+          App.handle.getUserLastName.call(properties[i])
+          .then(function(result)
+          {
+            last_name=result;
+            console.log(last_name);
+            string_name += " " +last_name;
+          });
           document.getElementById("container_timeline").innerHTML += '<div class="container left"><div class="content">' + properties[i] + '</div></div>'
+         // document.getElementById("container_timeline").innerHTML += '<div class="container right"><div class="content">' + first_name + " " + last_name + '</div></div>'
+        document.getElementById("container_timeline").innerHTML += '<div class="container right"><div class="content">' + string_name + '</div></div>'
         }
     })
 
