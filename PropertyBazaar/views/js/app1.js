@@ -125,7 +125,7 @@ function onButtonBuy()
       }
 
       account = accounts[0];
-    })
+    });
 	console.log(App.handle.getAddress.call(property_id));
 
   App.handle.getRented.call(property_id)
@@ -139,12 +139,12 @@ function onButtonBuy()
         {
 //<<<<<<< Updated upstream
 //=======
-          owner=addr;
+          /*owner=addr;
           console.log(addr);
           App.handle.buyProperty(owner,account,property_id,{from:account,to:owner,value:web3.toWei(1,"ether")})
             .then(function(bool)
               {
-                console.log(Boolean(bool) + " transaction completed");
+                console.log(Boolean(bool) + " transaction completed");*/
 //>>>>>>> Stashed changes
                 App.handle.getAddress.call(property_id)
           .then(function(addr)
@@ -157,7 +157,7 @@ function onButtonBuy()
                 /*console.log(addr);*/
                 else
                 {
-                  App.handle.buyProperty(owner,account,property_id)
+                  App.handle.buyProperty(owner,account,property_id,{from:account,to:owner,value:web3.toWei(1,"ether")})
                   .then(function(bool)
                     {
                       console.log(Boolean(bool) + " transaction completed");
