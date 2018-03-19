@@ -69,20 +69,35 @@ function onButtonAdd()
            account = accounts[0];
            console.log(account);
            console.log(prop_id);
-           App.handle.addProperty(account,prop_id/*,{from: account}*/)
+
+           App.handle.getAddress.call(prop_id)
+           .then(function(addr1)
+           {
+              if(addr1== '0x0000000000000000000000000000000000000000')
+              {
+                  App.handle.addProperty(account,prop_id/*,{from: account}*/)
                                   .then(function(result)
                                   {
-                                    if(Boolean(result)==true)
-                                    {
                                       App.handle.getAddress.call(prop_id)
-                                      .then(function(addr){alert("The property is registered with user "+addr);})
-                                    }
-                                    else
-                                    {
-                                      App.handle.getAddress.call(prop_id)
-                                      .then(function(addr){alert("The property is already registered under user "+addr);})
-                                    }
-                                  })
+                                      .then(function(addr){alert("The property is now registered with user "+addr);})                                
+                                  });
+              }
+
+              else
+              {
+                if(account==addr1)
+                {
+                  alert("The property is already registered with your account!");
+                }
+                else
+                {
+                  alert("The property is already registered with user "+addr1);
+                }
+                
+              }
+           });
+
+           
                                       
 
  });
@@ -112,24 +127,45 @@ function onButtonBuy()
       account = accounts[0];
     })
 	console.log(App.handle.getAddress.call(property_id));
-    App.handle.getAddress.call(property_id)
-      .then(function(addr)
-        {
-          owner=addr;
-          console.log(addr);
-          App.handle.buyProperty(owner,account,property_id)
-            .then(function(bool)
-              {
-                console.log(Boolean(bool) + " transaction completed");
-                App.handle.getAddress.call(property_id)
-                  .then(function(addr){console.log("Property transferred to " + addr);
-                                        alert("The property is transferred to "+ addr);
-                                      })
 
-              }
-            )
+  App.handle.getRented.call(property_id)
+    .then(function(addr1)
+    {
+        if(Boolean(addr1)==true)
+        {
+          alert("The property is already rented! Can't be bought");
         }
-        );
+        else
+        {
+                App.handle.getAddress.call(property_id)
+          .then(function(addr)
+            {
+                owner=addr;
+                if(owner==account)
+                {
+                  alert("The property already belongs to you");
+                }
+                /*console.log(addr);*/
+                else
+                {
+                  App.handle.buyProperty(owner,account,property_id)
+                  .then(function(bool)
+                    {
+                      console.log(Boolean(bool) + " transaction completed");
+                      App.handle.getAddress.call(property_id)
+                        .then(function(addr){console.log("Property transferred to " + addr);
+                                              alert("The property is transferred to "+ addr);
+                                            })
+
+                    }
+                  )
+                }
+              
+            });
+        }
+    });
+
+    
 }
 
 function onButtonLease()
@@ -150,11 +186,21 @@ function onButtonLease()
       account = accounts[0];  //renter
     });
 
-  App.handle.getAddress.call(prop_id)
+  App.handle.getRented.call(prop_id)
+    .then(function(addr1)
+    {
+      if(Boolean(addr1)==true)
+      {
+        alert("The property is already leased, can't be leased currently!");
+      }
+      
+      else
+      {
+        App.handle.getAddress.call(prop_id)
       .then(function(addr)
       {
         owner=addr;
-        console.log("Reaches just before the func start");
+        //console.log("Reaches just before the func start");
         App.handle.leasePropertyStart(owner,account,prop_id,years,weeks,days,{from:account})
             .then(function(result)
             {
@@ -170,6 +216,10 @@ function onButtonLease()
             })
               var checker=setTimeout(forChecker.bind(null,owner,account,prop_id),timeOut*1000);
       });
+      }
+    });
+
+  
 
     /*var eventVar=App.handle.checkLease();
     eventVar.watch(function(error,result)
