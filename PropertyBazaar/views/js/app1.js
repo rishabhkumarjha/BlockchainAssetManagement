@@ -137,6 +137,15 @@ function onButtonBuy()
         }
         else
         {
+<<<<<<< Updated upstream
+=======
+          owner=addr;
+          console.log(addr);
+          App.handle.buyProperty(owner,account,property_id,{from:account,to:owner,value:web3.toWei(1,"ether")})
+            .then(function(bool)
+              {
+                console.log(Boolean(bool) + " transaction completed");
+>>>>>>> Stashed changes
                 App.handle.getAddress.call(property_id)
           .then(function(addr)
             {

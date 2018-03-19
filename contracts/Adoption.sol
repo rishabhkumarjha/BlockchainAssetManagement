@@ -46,10 +46,11 @@ function getCount(uint prop_id) public view returns(uint length) {
     return chain_of_custody[prop_id].length;
   }
 
-function buyProperty(address owner, address buyer, uint propid) public returns (bool) {
+function buyProperty(address owner, address buyer, uint propid) public payable returns (bool) {
 
         if(pid_to_address_map[propid] == owner)
         {
+            owner.transfer(msg.value);
             pid_to_address_map[propid] = buyer;
             chain_of_custody[propid].push(buyer);
             //pid_to_noOfOwners[propid]++;
