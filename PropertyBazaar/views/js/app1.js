@@ -114,7 +114,7 @@ function onButtonBuy()
     /*var event=App.handle.checkLease();
     event.watch(function(error,result){if (!error)
         console.log(result);});*/
-    var account;
+    var account,temp;
     var valINR=parseFloat(valINR);
     var valEth=parseFloat(valEth);
     var owner=null;
@@ -122,9 +122,16 @@ function onButtonBuy()
 
     $.getJSON('../Properties.json', function(data)
     {
+      for(var i=0;i<data.length;i++)
+      {
+        if(data[i].id==property_id)
+        {
+          temp=i;
+        }
+      }
 
-        valINR=parseFloat(data[property_id].plan.total);
-        valEth=parseFloat((valINR /40300)/*.toFixed(2)*/);
+        valINR=parseFloat(data[temp].plan.total);
+        valEth=parseFloat((valINR /40300).toFixed(7));
         console.log(valINR);
         console.log(valEth);
     });
@@ -140,7 +147,12 @@ function onButtonBuy()
     });
 	console.log(App.handle.getAddress.call(property_id));
 
-  App.handle.getRented.call(property_id)
+App.handle.getAddress.call(property_id)
+.then(function(addr2)
+{
+    if(addr2!='0x0000000000000000000000000000000000000000')
+    {
+      App.handle.getRented.call(property_id)
     .then(function(addr1)
     {
         if(Boolean(addr1)==true)
@@ -185,6 +197,15 @@ function onButtonBuy()
             });
         }
     });
+    }
+
+    else
+    {
+      alert("Register your property on the BlockChain first!");
+    }
+});
+
+  
 
     
 }
@@ -207,7 +228,12 @@ function onButtonLease()
       account = accounts[0];  //renter
     });
 
-  App.handle.getRented.call(prop_id)
+  App.handle.getAddress.call(prop_id)
+  .then(function(addr2)
+  {
+    if(addr2!='0x0000000000000000000000000000000000000000')
+    {
+      App.handle.getRented.call(prop_id)
     .then(function(addr1)
     {
       if(Boolean(addr1)==true)
@@ -239,6 +265,14 @@ function onButtonLease()
       });
       }
     });
+    }
+
+    else
+    {
+      alert("Register the property on the blockchain first!");
+    }
+  });
+  
 
   
 
