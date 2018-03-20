@@ -18,6 +18,10 @@ app.use(logger('dev'))
 
 //app.use(bodyParser())
 
+process.on('uncaughtException', function (exception) {
+  console.log(exception); // to see your exception details in the console
+});
+
 app.use('/getPropertyDetails',router)
 router.get('/',function(request,response,next){
 	response.render('getPropertyDetails.ejs')
@@ -25,9 +29,6 @@ router.get('/',function(request,response,next){
 
 
 var fs = require('fs')
-process.on('uncaughtException', function (exception) {
-  console.log(exception); // to see your exception details in the console
-});
 
 var fname;
 var lname;
@@ -41,6 +42,16 @@ var street;
 var city;
 var state;
 var overview;
+var hour_water_supply = false
+var hour_security = false
+var club_house = false
+var fire_fighting_equipment = false
+var kids_play_ground = false
+var Wifi_Connectivity = false
+var Meditation_Center = false
+var Senior_Citizen_Park = false
+var Power_Backup = false
+var Jogging_Amenities = false
 
 app.get('/',function(request,response){
 	//response.send("<h1>Prep For Prep</h1>")
@@ -60,9 +71,13 @@ router.post('/',function(request,response,next){
 	street = request.body.street;
 	city = request.body.city;
 	state = request.body.state;
-	fname= request.body.fname;
-	lname= request.body.lname;
-
+	fname = request.body.fname;
+	lname = request.body.lname;
+	hour_water_supply = request.body.hour_water_supply
+	hour_security = request.body.hour_security
+	club_house = request.body.club_house
+	fire_fighting_equipment = request.body.fire_fighting_equipment
+	kids_play_ground = request.body.kids_play_ground
 
 	var currentSearchResult = {
 	id : propertyId,
@@ -70,7 +85,7 @@ router.post('/',function(request,response,next){
 	firstName : fname,
 	lastName : lname,
 	overview : overview,
-	picture : "images/p13.jpeg",
+	picture : "images/new.jpg",
 	plan : {
 		type : propertyType,
 		area : propertyArea,
