@@ -48,7 +48,7 @@ App =
 
 };
 
-function onButtonAdd()
+function onButtonAdd(prop)
 {
    //alert("in onButtonAdd");
     var x = "t";
@@ -75,15 +75,15 @@ function onButtonAdd()
            console.log(account);
            console.log(prop_id);
 
-           App.handle.getAddress.call(prop_id)
+           App.handle.getAddress.call(prop)
            .then(function(addr1)
            {
               if(addr1== '0x0000000000000000000000000000000000000000')
               {
-                  App.handle.addProperty(account,prop_id,first_name,last_name,{from: account})
+                  App.handle.addProperty(account,prop,first_name,last_name,{from: account})
                                   .then(function(result)
                                   {
-                                      App.handle.getAddress.call(prop_id)
+                                      App.handle.getAddress.call(prop)
                                       .then(function(addr){alert("The property is now registered with user "+addr);})                                
                                   });
               }
@@ -435,6 +435,20 @@ function onButtonGetOwner()
 function onPageLoad()
 {
     setTimeout(onButtonGetCOC.bind(),1000);
+}
+
+function onButtonGetProperties()
+{
+  var acc=document.getElementById("account_number").value;
+  console.log(acc);
+  App.handle.getProperties.call(acc)
+  .then(function(id)
+  {
+    for(var i=0;i<id.length;i++)
+    {
+      console.log(Number(id[i]));
+    }
+  })
 }
 
 function onButtonGetCOC()
