@@ -343,7 +343,7 @@ function forChecker(owner,account,p)
 
 function setupBuy(){
   var create_textfields = document.getElementById("text_fields");
-  create_textfields.innerHTML = ""
+  create_textfields.innerHTML = "<label>Property Id</label>"
   document.getElementById("time").innerHTML=""
   document.getElementById("button_container").innerHTML=""
   var text_field = document.createElement("input");
@@ -396,7 +396,7 @@ function setupRegister(){
 
 function setupLease(){
   var create_textfields = document.getElementById("text_fields");
-  create_textfields.innerHTML=""
+  create_textfields.innerHTML="<label>Property Id</label>"
   document.getElementById("time").innerHTML=""
   document.getElementById("button_container").innerHTML=""
   var text_field = document.createElement("input");
@@ -407,7 +407,7 @@ function setupLease(){
   text_field.disabled=true;
   create_textfields.appendChild(text_field);
 
-  document.getElementById("time").innerHTML+='<div class="medium-4 column"><input type=text id=years placeholder="No of years"></div><div class="medium-4 column"><input type=text id=weeks placeholder="No of weeks"></div><div class="medium-4 column"><input type=text id=days placeholder="No of days"></div>'
+  document.getElementById("time").innerHTML+='<div class="medium-4 column"><label>No Of Years</label><input type=text id=years placeholder="No of years"></div><div class="medium-4 column"><label>No Of Months</label><input type=text id=weeks placeholder="No of weeks"></div><div class="medium-4 column"><label>No Of Days</label><input type=text id=days placeholder="No of days"></div>'
 
   var button = document.createElement("button")
   button.className="button success medium-12"
