@@ -4,6 +4,7 @@ App =
     web3Provider: null,
       contracts: {},
       web3:null,
+    account:null,
       
 
        initWeb3: function() 
@@ -39,6 +40,7 @@ App =
     App.handle = instance;
     console.log("deployed");
     getAccountDetails();
+    
  
 
   });
@@ -59,10 +61,12 @@ function getAccountDetails(){
       }
       else{
         account = res;
+	App.account =res;
         account_info = "Account Number : " + res;
         console.log(account_info)
         //document.getElementById("account_info_container").innerHTML = account_info
         console.log(res)
+	onButtonGetProperties();
         web3.eth.getBalance(account[0],function(err,bal)
         {
           if(err){
@@ -93,6 +97,20 @@ function getAccountDetails(){
   
 }
 
+function onButtonGetProperties()
+{
+  var acc=App.account;
+  console.log(acc);
+  App.handle.getProperties.call(acc)
+  .then(function(id)
+  {
+    for(var i=0;i<id.length;i++)
+    {
+      console.log(Number(id[i]));
+      document.getElementById("property_container").innerHTML += '<br><div class="division">'+"Property ID : "+id[i]+'</div><br>'
+    }
+  })
+}
 
 $(function() {
     $(window).load(function() {
