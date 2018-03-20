@@ -59,8 +59,8 @@ app.get('/',function(request,response){
 })
 
 router.post('/',function(request,response,next){
-	console.log(request.body);
-	console.log(request.body.propertyId)
+	//console.log(request.body);
+	//console.log(request.body.propertyId)
 	propertyId = request.body.id;
 	propertyTitle = request.body.title;
 	overview = request.body.overview;
@@ -78,7 +78,51 @@ router.post('/',function(request,response,next){
 	club_house = request.body.club_house
 	fire_fighting_equipment = request.body.fire_fighting_equipment
 	kids_play_ground = request.body.kids_play_ground
-
+	Wifi_Connectivity = request.body.Wifi_Connectivity
+	Meditation_Center = request.body.Meditation_Center
+	Senior_Citizen_Park = request.body.Senior_Citizen_Park
+	Power_Backup = request.body.Power_Backup
+	Jogging_Amenities = request.body.Jogging_Amenities
+	if(hour_water_supply=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(hour_security=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(club_house=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(fire_fighting_equipment=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(kids_play_ground=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(Wifi_Connectivity=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(Meditation_Center=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(Senior_Citizen_Park=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(Jogging_Amenities=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
+	if(Power_Backup=='on'){
+		//console.log(hour_water_supply)
+		hour_water_supply = true
+	}
 	var currentSearchResult = {
 	id : propertyId,
 	title : propertyTitle,
@@ -101,16 +145,16 @@ router.post('/',function(request,response,next){
     		lng:""
 	},
 	amenities:{
-		"24-hour-water-supply":true,
-    		"24-hour-security":true,
-    		"club-house":true,
-    		"fire-fighting-equipment":true,
-    		"kids-play-ground":true,
-    		"Wifi Connectivity":true,
-    		"Meditation Center":true,
-    		"Senior Citizen Park":true,
-    		"Power Backup":true,
-    		"Jogging Amenities":true
+		hour_water_supply
+		hour_security
+		club_house
+		fire_fighting_equipment
+		kids_play_ground
+		Wifi_Connectivity
+		Meditation_Center
+		Senior_Citizen_Park
+		Power_Backup
+		Jogging_Amenities
 	}
 };
 
