@@ -74,7 +74,9 @@ function getAccountDetails(){
           }
           else{
             console.log(bal['e'])
-            account_info +='<br>'+"Balance : "+web3.fromWei(parseInt(bal['s'])*10**parseInt(bal['e'])) + " ethers";
+            console.log(bal)
+            //account_info +='<br>'+"Balance : "+web3.fromWei(parseInt(bal['s'])*10**parseInt(bal['e'])) + " ethers";
+            account_info +='<br>'+"Balance : "+parseInt(bal['c'][0])/10000 + " ethers";
             document.getElementById("account_info_container").innerHTML += account_info;
           }
         }
@@ -103,13 +105,35 @@ function onButtonGetProperties()
   console.log(acc);
   App.handle.getProperties.call(acc)
   .then(function(id)
-  {
+  {var pids = [];
     for(var i=0;i<id.length;i++)
     {
+      pids[i] = id[i]
       console.log(Number(id[i]));
-      document.getElementById("property_container").innerHTML += '<br><div class="division">'+"Property ID : "+id[i]+'</div><br>'
+      document.getElementById("property_container").innerHTML += '<br><div class="division" id="'+id[i]+'">'+"Property ID : "+id[i]+'</div><br>'
+      //document.getElementById(id[i]).setAttribute("onclick",'showPropertyDetails('+id[i]+')')
+      document.getElementById(id[i]).innerHTML += '<input class="button" type=button value="View Details" style="margin-left:10px;margin-right:10px" class="button" onclick="showPropertyDetails('+id[i]+')">'
+      document.getElementById(id[i]).innerHTML += '<input class="button" type=button value="Sell" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
+      App.handle.getRented.call(id[i])
+        .then(function(ifrented)
+          {
+            if(ifrented == true){
+              console.log("pids : " + pids[i])
+              document.getElementById(pids[i]).innerHTML += '<input class="button" type="button" value="Rented" disabled>';
+              document.getElementById(pids[i]+"_sell_button").disabled=true;
+            }
+            else{
+              console.log("pids : " + pids[i])
+              document.getElementById(id[i]).innerHTML += '<input class="button" type=button value="Rent" background-color="green" style="margin-left:10px;margin-right:10px" onclick="putOnRent('+id[i]+')">';
+            }
+          }).wait();
     }
   })
+}
+
+function showPropertyDetails(pid){
+  document.cookie = pid;
+  document.location.href = "PropertyDetails?"
 }
 
 $(function() {

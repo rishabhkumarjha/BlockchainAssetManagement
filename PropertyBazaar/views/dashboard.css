@@ -24,3 +24,11 @@
 .division:hover{
     background-color: skyblue;
 }
+
+.button{
+    background-color: skyblue;
+}
+
+.button:hover{
+    scale:110%;
+}
