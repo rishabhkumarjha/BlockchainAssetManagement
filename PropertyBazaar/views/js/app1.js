@@ -450,29 +450,34 @@ function onButtonGetCOC()
     {
         //console.log(properties);
         console.log(properties.length);
+      
         for(i=0;i<properties.length /*&& properties[i]!== '0x0000000000000000000000000000000000000000'*/;i++)
-        {var first_name, last_name;
-          var string_name = "";
+        { //temp="";
+        
+        
           console.log(properties[i]);
+          
+          
+         document.getElementById("container_timeline").innerHTML += '<div id="x" class=""><div class="content">' + properties[i]+ '<div class="'+properties[i]+'"></div></div></div><br><br><br>'
            App.handle.getUserFirstName.call(properties[i])
           .then(function(result)
           {
-            first_name=result;
-            console.log(first_name);
-            string_name = first_name;
+            
+            
+            
+            console.log("displaying" + result[2])
+            //document.getElementById(i).innerHTML += '<div class=""><div class="content">' + result[0]+" "+result[1]+" "+result[2] +'</div></div>'
+            //document.getElementById(result[2]).innerHTML += '<div class=""><div class="content">' + result[0]+" "+ result[1] + " "+result[2] +'</div></div><br><br><br>'
+            var nodeList = document.getElementsByClassName(result[2]);
+            for(var j=0;j<nodeList.length;j++){
+              document.getElementsByClassName(result[2])[j].innerHTML = result[0] + " " +result[1]
+            }
             //document.getElementById("container_timeline").innerHTML += '<div class="container right"><div class="content">' + first_name + '</div></div>'
           });
 
-          App.handle.getUserLastName.call(properties[i])
-          .then(function(result)
-          {
-            last_name=result;
-            console.log(last_name);
-            string_name += " " +last_name;
-          });
-          document.getElementById("container_timeline").innerHTML += '<div class="container left"><div class="content">' + properties[i] + '</div></div>'
+
          // document.getElementById("container_timeline").innerHTML += '<div class="container right"><div class="content">' + first_name + " " + last_name + '</div></div>'
-        document.getElementById("container_timeline").innerHTML += '<div class="container right"><div class="content">' + string_name + '</div></div>'
+        
         }
     })
 

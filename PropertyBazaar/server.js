@@ -145,15 +145,15 @@ router.post('/',function(request,response,next){
     		lng:""
 	},
 	amenities:{
-		hour_water_supply
-		hour_security
-		club_house
-		fire_fighting_equipment
-		kids_play_ground
-		Wifi_Connectivity
-		Meditation_Center
-		Senior_Citizen_Park
-		Power_Backup
+		hour_water_supply,
+		hour_security,
+		club_house,
+		fire_fighting_equipment,
+		kids_play_ground,
+		Wifi_Connectivity,
+		Meditation_Center,
+		Senior_Citizen_Park,
+		Power_Backup,
 		Jogging_Amenities
 	}
 };
