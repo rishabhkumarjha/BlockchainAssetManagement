@@ -11,7 +11,7 @@ App1 = {
       console.log("init")
       var petsRow = $('#petsRow');
       var petTemplate = $('#petTemplate');
-
+      petTemplate.style = "width:200px;height:200px"
       for (i = 0; i < data.length; i ++) {
         petTemplate.find('.panel-title').text(data[i].title);
         petTemplate.find('img').attr('src', data[i].picture);

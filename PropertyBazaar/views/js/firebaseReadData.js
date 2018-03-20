@@ -24,8 +24,7 @@ function viewDetails() {
    document.getElementById('type').innerHTML = propertyObject.plan.type;
    document.getElementById('area').innerHTML = propertyObject.plan.area;
    document.getElementById('rate').innerHTML = propertyObject.plan.rate;
-   document.getElementById('total').innerHTML = propertyObject.plan.total;	   
-	document.getElementById('water').style = "opicity:0.2;"; 
+   document.getElementById('total').innerHTML = propertyObject.plan.total;
    lat = parseFloat(propertyObject.location.lat);
    lng = parseFloat(propertyObject.location.lng);
    console.log(lat);

@@ -22,9 +22,23 @@
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-push-2">
           <h1 class="text-center">Property Bazaar</h1>
+	<script>
+            function myFunction() {
+    		var txt;
+    		var person = prompt("Enter The Property Id", "Property Id");
+    		if (person == null || person == "") {
+        		txt = "User cancelled the prompt.";
+    		} else {
+        		onButtonAdd(person)
+			console.log(person)	
+    		}
+	    }
+      </script>
         <form action="/getPropertyDetails" method = "get">
           <input type="submit" class="btn btn-default btn-details"  value="Register Property" />
-          <input type="button" class="btn btn-default btn-details" value="Add Property to blockChain" onclick="onButtonAdd()">
+	  <form>
+          	<input type="button" class="btn btn-default btn-details" value="Add Property to blockChain" onclick="myFunction()">
+	  </form>
         </form>
 
           <hr/>
