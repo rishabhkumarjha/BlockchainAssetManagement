@@ -54,26 +54,32 @@ function onButtonAdd(prop)
     var x = "t";
     var first_name,last_name;
     var temp; //gives the index of the prop_id in Properties.json
-    var prop_id;
+    
     var account;
    $.getJSON('../Properties.json', function(data) 
    {
-      x=data;
-      temp=x.length-1;
-      prop_id=x[temp].id;
-      first_name=x[temp].firstName;
-      last_name=x[temp].lastName;
+      
+      for(var j=0;j<data.length;j++)
+      {
+        if(prop==data[j].id)
+        {
+          temp=j;
+        }
+      }
+     
+      first_name=data[temp].firstName;
+      last_name=data[temp].lastName;
     //console.log(account);
     
-      propertyObject = data[parseInt(document.cookie)];
-      console.log(propertyObject);
+     /* propertyObject = data[parseInt(document.cookie)];
+      console.log(propertyObject);*/
     web3.eth.getAccounts(function(error, accounts) {
           if (error) {
             console.log(error);
           }
            account = accounts[0];
            console.log(account);
-           console.log(prop_id);
+          
 
            App.handle.getAddress.call(prop)
            .then(function(addr1)
@@ -153,7 +159,7 @@ function onButtonBuy()
 
       account = accounts[0];
     });
-	console.log(App.handle.getAddress.call(property_id));
+  console.log(App.handle.getAddress.call(property_id));
 
 App.handle.getAddress.call(property_id)
 .then(function(addr2)
@@ -254,9 +260,16 @@ function onButtonLease()
         App.handle.getAddress.call(prop_id)
       .then(function(addr)
       {
-        owner=addr;
-        //console.log("Reaches just before the func start");
-        App.handle.leasePropertyStart(owner,account,prop_id,years,weeks,days,{from:account})
+
+        if(addr==account)
+        {
+          alert("The property belongs to you!");
+        }
+
+        else
+        {
+          owner=addr;
+          App.handle.leasePropertyStart(owner,account,prop_id,years,weeks,days,{from:account})
             .then(function(result)
             {
                
@@ -268,8 +281,12 @@ function onButtonLease()
 
                 
 
-            })
+            });
               var checker=setTimeout(forChecker.bind(null,owner,account,prop_id),timeOut*1000);
+        }
+        
+        //console.log("Reaches just before the func start");
+        
       });
       }
     });
@@ -313,14 +330,12 @@ function forChecker(owner,account,p)
     var owner=0xf17f52151EbEF6C7334FAD080c5704D77216b732;
     var renter=0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef;
    
-
    App.handle.getAddress.call(p)
       .then(function(addr)
       {
         renter=addr;
         console.log("renter="+renter);
       })
-
   App.handle.getOldOwner.call(p)
     .then(function(addr1)
     {
@@ -373,20 +388,16 @@ function setupRegister(){
   text_field.type="text"
   text_field.placeholder="Owner Address"
   create_textfields.appendChild(text_field)
-
   var text_field1 = document.createElement("input");
   text_field1.id="property_id"
   text_field1.type="text"
   text_field1.placeholder="Property ID"
-
   create_textfields.appendChild(text_field1);
-
   var button = document.createElement("button")
   button.className="button success medium-12"
   button.innerHTML="Register Property"
   button.setAttribute("onclick","onButtonAdd()");
   document.getElementById("button_container").appendChild(button);
-
   $(function(){
     $('#container').load('/home/anand/foundation/WebDevelopment/getPropertyDetails.html');
   });*/
@@ -499,7 +510,7 @@ function onButtonGetCOC()
 
 
 $(function() {
-  $(window).load(function() {
-    App.initWeb3();
+$(window).load(function() {
+  App.initWeb3();
   });
 }); 
