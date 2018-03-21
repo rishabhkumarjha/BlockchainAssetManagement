@@ -9,8 +9,21 @@
         <link href="css/dashboard.css" rel="stylesheet">
     </head>
     
-    <body class="enclosure">
-        <div class="division">
+    <body style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+        <div align="center" style="font-size: 44px">Property Bazaar</div>
+        <div id="button_container" class="ButtonContainer">
+                <form action = "/getPropertyDetails" method = "get">
+                    <input type = "submit" class = "std-button" value = "Register Property"/>
+                </form>
+                <div>
+                    <input type="submit" class="std-button" value="Add To Blockchain" onclick = "myFunction()"/>
+                </div>
+                <div>
+                    <input type="button" class="std-button" onclick='window.location.href="dashboard.html"' value="Dashboard"/>
+                </div>
+        </div>
+        <!-- <div class="division">
+            
                 <img src="images/PropertyBazaar.jpg" class="avatar">
             <div class="content">
             	<div class = "newspaper" style="width:600px;height:200px">
@@ -27,8 +40,9 @@
           		<input type = "button" class = "button1" value = "Dashboard" onclick='window.location.href="dashboard.html"'/>
             	</div>
             </div>
-        </div>
-	<div id="propertyContainer">
+        </div> -->
+	<div id="propertyContainer" class="PropertyContianer">
+        
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="js/web3.min.js"></script>

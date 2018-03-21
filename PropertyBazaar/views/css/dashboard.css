@@ -38,7 +38,7 @@
     font-size:17px;
     padding:16px 31px;
     text-decoration:none;
-    text-shadow:0px 1px 0px #2f6627;
+    /* text-shadow:0px 1px 0px #2f6627; */
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
@@ -60,4 +60,50 @@
 
 .container {
     padding: 2px 16px;
+}
+
+.PropertyContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.PropertyCard{
+    flex:1;
+    border: 1px rgb(204, 194, 194) solid;
+    /* border-radius: 25%; */
+    justify-content: flex-end;
+    margin-left: 20px;
+    margin-top: 20px;
+    text-align: left;
+    color:rgb(70, 67, 67);
+    max-width: 315px;
+    /* background-color: rgb(231, 228, 228) */
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.ButtonContainer{
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.std-button{
+    flex: 1;
+    max-width: 300px;
+    background-color: white;
+    border: grey 1px solid;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 200px;
+    margin: 10px;
+}
+.std-button:hover{
+    background-color: rgb(179, 174, 174);
 }
