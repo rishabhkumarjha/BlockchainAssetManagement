@@ -55,7 +55,7 @@ var Jogging_Amenities = false
 
 app.get('/',function(request,response){
 	//response.send("<h1>Prep For Prep</h1>")
-	response.render('index.ejs')
+	response.render('firstPage.ejs')
 })
 
 router.post('/',function(request,response,next){
@@ -167,7 +167,7 @@ fs.readFile('./views/Properties.json', function (err, data) {
     //console.log(json)
     fs.writeFile('./views/Properties.json', JSON.stringify(json))
 })
-response.render('index.ejs')
+response.render('firstPage.ejs')
 })
 
 
