@@ -3,6 +3,7 @@
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/getPropertyDetails.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,17 +68,17 @@
 
         <div class = "columns medium-6">
           <label>Carpet Area (Sq.Ft.)</label>
-          <input name= "area" type = "number" placeholder="Carpet Area (Sq.Ft.)" required>
+          <input name= "area" id="area" type = "number" placeholder="Carpet Area (Sq.Ft.)" onchange = "totalCost()" required>
         </div>
 
         <div class = "columns medium-6">
           <label>Rate Per Sq.Ft.</label>
-          <input name = "rate" type = "number" placeholder="Rate Per Sq.Ft." required>
+          <input name = "rate" id = "rate" type = "number" placeholder="Rate Per Sq.Ft." onchange = "totalCost()" required>
         </div>
 
         <div class = "columns medium-6">
           <label>Total Cost</label>
-          <input name = "total" type = "number" placeholder="Total Cost" required>
+          <input name = "total" id = "total" type = "number" placeholder="Total Cost" onclick="totalCost()">
         </div>
 
         <fieldset class="fieldset">

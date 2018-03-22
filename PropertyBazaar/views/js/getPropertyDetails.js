@@ -1,11 +1,6 @@
-var propertyData
-$.getJSON('../Properties.json', function(data) {
-      console.log("data"+data);
-      propertyData = data
-      console.log(propertyData);
-    });
-
-
-$(".target" ).change(function() {
-  alert( "Handler for .change() called." );
-});
+function totalCost(){
+  var x = parseInt(document.getElementById("rate").value);
+  var y = parseInt(document.getElementById("area").value);
+  document.getElementById("total").value = x * y;
+  console.log(x*y)
+}
