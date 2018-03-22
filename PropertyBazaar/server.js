@@ -202,9 +202,12 @@ app.get('*',function(reuest,response,next){
 })
 */
 
+app.use('/sellable:id',function(request,responce){
+	console.log(request.params.id);
+})
 
 
 
-app.listen(12345, function(){
-	console.log("App is running on port " + 12345)
+app.listen(80, function(){
+	console.log("App is running on port" + 80)
 })
