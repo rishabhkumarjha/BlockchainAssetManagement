@@ -48,7 +48,7 @@ App =
 
 };
 
-function onButtonAdd(prop)
+function onButtonAdd(prop)  //for add property to blockchain button
 {
    //alert("in onButtonAdd");
     var x = "t";
@@ -66,10 +66,19 @@ function onButtonAdd(prop)
           temp=j;
         }
       }
-     
-      first_name=data[temp].firstName;
+
+      if(!temp)
+      {
+        alert("First register your property");
+      }
+
+      else
+     {
+            first_name=data[temp].firstName;
       last_name=data[temp].lastName;
-    //console.log(account);
+      amt=data[temp].plan.total;
+      amt=Number(amt);
+    console.log(amt);
     
      /* propertyObject = data[parseInt(document.cookie)];
       console.log(propertyObject);*/
@@ -78,15 +87,16 @@ function onButtonAdd(prop)
             console.log(error);
           }
            account = accounts[0];
-           console.log(account);
+          // console.log(account);
           
 
            App.handle.getAddress.call(prop)
            .then(function(addr1)
            {
+              console.log(addr1);
               if(addr1== '0x0000000000000000000000000000000000000000')
               {
-                  App.handle.addProperty(account,prop,first_name,last_name,{from: account})
+                  App.handle.addProperty(account,prop,first_name,last_name/*,amt*/,{from: account})
                                   .then(function(result)
                                   {
                                       App.handle.getAddress.call(prop)
@@ -112,6 +122,8 @@ function onButtonAdd(prop)
                                       
 
  });
+     }
+
     
     });
 
