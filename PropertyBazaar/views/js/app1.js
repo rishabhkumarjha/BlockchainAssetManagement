@@ -96,7 +96,7 @@ function onButtonAdd(prop)  //for add property to blockchain button
               console.log(addr1);
               if(addr1== '0x0000000000000000000000000000000000000000')
               {
-                  App.handle.addProperty(account,prop,first_name,last_name/*,amt*/,{from: account})
+                  App.handle.addProperty(account,prop,first_name,last_name,amt,{from: account})
                                   .then(function(result)
                                   {
                                       App.handle.getAddress.call(prop)
@@ -367,6 +367,84 @@ function forChecker(owner,account,p)
 
    
 }
+
+
+
+function onButtonPropertyAuction()
+{
+  var timeOut=60;
+  var amount=document.getElementById("amount").value;
+  console.log(amount);
+  var prop_id=document.getElementById("prop_id").value;
+  console.log(prop_id);
+  var account;
+ web3.eth.getAccounts(function(error, accounts) 
+    {
+      if (error) 
+      {
+        console.log(error);
+      }
+
+      account = accounts[0];
+      console.log(account);
+    
+
+  App.handle.auction(account,prop_id,amount,{from:account})
+                  .then(function()
+                    {
+                      console.log("your value is noted");
+                      App.handle.getBidAmount.call(account)
+                      .then(function(price)
+                      {
+                        console.log("Account "+account+" has bid "+price);
+                      })
+
+                      App.handle.getList.call(prop_id)
+                      .then(function(result)
+                      {
+                        console.log(result[0]);
+                        for(var i=0;i<result[0].length;i++)
+                        {
+                          console.log(result[0][i]["c"]);
+                        }
+                        //console.log(result[1]);
+                        for(var i=0;i<result[1].length;i++)
+                        {
+                          console.log(result[1][i]);
+                        }
+                      })
+                    }
+                  )
+    });
+
+   //setTimeout(AuctionResults.bind(null,prop_id),timeOut*1000);
+   
+}
+
+function AuctionResults()
+{
+  var prop_id=document.getElementById("prop_id").value;
+
+  App.handle.getAuctionWinner.call(prop_id)
+    .then(function(addr)
+      {alert("The property has gone to the highest bidder "+addr);
+
+        App.handle.getAuctionPrice.call(prop_id)
+        .then(function(val)
+          {
+            alert("The auction is successful at Rs. "+val);
+          })
+
+        App.handle.endAuction(prop_id,addr,{from:addr})
+        .then(function()
+        {
+          console.log("The auction has ended");
+        })
+
+    })
+}
+
+
 
 function setupBuy(){
   var create_textfields = document.getElementById("text_fields");

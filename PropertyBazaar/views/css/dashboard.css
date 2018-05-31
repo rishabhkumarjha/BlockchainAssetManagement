@@ -107,3 +107,20 @@
 .std-button:hover{
     background-color: rgb(179, 174, 174);
 }
+
+
+@media (max-width:800px) and (min-width:300px){
+    .row{
+        flex-direction: column;
+        max-width: 100%;
+    }
+    .PropertyCard{
+        max-width: 800px;
+    }
+    .ButtonContainer{
+        /*position: relative;
+        right: -75px;*/
+        text-align: center;
+        flex-direction: column;
+    }
+}

@@ -114,6 +114,8 @@ function onButtonGetProperties()
       //document.getElementById(id[i]).setAttribute("onclick",'showPropertyDetails('+id[i]+')')
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="View Details" style="margin-left:10px;margin-right:10px" onclick="showPropertyDetails('+id[i]+')">'
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Sell" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
+      document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
+      document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Rent" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
       App.handle.getRented.call(id[i])
         .then(function(ifrented)
           {
@@ -126,7 +128,7 @@ function onButtonGetProperties()
               console.log("pids : " + pids[i])
               document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Rent" background-color="green" style="margin-left:10px;margin-right:10px" onclick="putOnRent('+id[i]+')">';
             }
-          }).wait();
+          })/*.wait()*/;
     }
   })
 }
