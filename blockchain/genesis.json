@@ -7,7 +7,7 @@
       "byzantiumBlock": 0
    },
    "difficulty": "400",
-   "gasLimit": "2000000",
+   "gasLimit": "4000000",
    "alloc": {
       "7b684d27167d208c66584ece7f09d8bc8f86ffff": { 
           "balance": "100000000000000000000000" 

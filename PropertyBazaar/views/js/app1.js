@@ -375,10 +375,10 @@ function onButtonPropertyAuction()
   var timeOut=60;
   var amount=document.getElementById("amount").value;
   console.log(amount);
-  var prop_id=document.getElementById("prop_id").value;
+  var prop_id=document.getElementById("property_id").value;
   console.log(prop_id);
   var account;
- web3.eth.getAccounts(function(error, accounts) 
+  web3.eth.getAccounts(function(error, accounts) 
     {
       if (error) 
       {
@@ -405,7 +405,7 @@ function onButtonPropertyAuction()
                         console.log(result[0]);
                         for(var i=0;i<result[0].length;i++)
                         {
-                          console.log(result[0][i]["c"]);
+                          console.log(result[0][i]["c"][0]);
                         }
                         //console.log(result[1]);
                         for(var i=0;i<result[1].length;i++)
@@ -421,10 +421,10 @@ function onButtonPropertyAuction()
    
 }
 
-function AuctionResults()
+function AuctionResults(id_prop)
 {
-  var prop_id=document.getElementById("prop_id").value;
-
+  //var prop_id=document.getElementById("prop_id").value;
+  var prop_id = id_prop;
   App.handle.getAuctionWinner.call(prop_id)
     .then(function(addr)
       {alert("The property has gone to the highest bidder "+addr);
@@ -444,7 +444,38 @@ function AuctionResults()
     })
 }
 
+function viewBids(prop_id){
+  var pid = prop_id;
+  App.handle.getList.call(pid)
+                      .then(function(result)
+                      {
+                        console.log(result[0]);
+                        
+                        for(var i=0;i<result[1].length;i++)
+                        {
+                          console.log(result[1][i]);
+                          if(i==0){
+                            document.getElementById("button_container").innerHTML +="<table><tr><th>Account</th><th>Bid</th></tr>"
+                          }
+                          // document.getElementById("text_fields").innerHTML +="<tr>"
+                          // document.getElementById("text_fields").innerHTML +="<td>"+ /*result[1][i]+*/"k" + "</td>"
+                          // document.getElementById("text_fields").innerHTML +="<td>"+ /*result[0][i]["c"][0]+*/ "h" + "</td>"
+                          // document.getElementById("text_fields").innerHTML +="</tr>"
+                          document.getElementById("button_container").innerHTML +="<tr><td>"+result[1][i]+"</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+result[0][i]["c"][0]+"</td></tr><br>"
+                          if(i==result[1].length-1){
+                          document.getElementById("button_container").innerHTML +="</table>"
+                          }
+                        }
+                        
+                        for(var i=0;i<result[0].length;i++)
+                        {
+                          console.log(result[0][i]["c"][0]);
+                          
+                        }
+                        //console.log(result[1]);
+                      })
 
+}
 
 function setupBuy(){
   var create_textfields = document.getElementById("text_fields");
@@ -517,6 +548,39 @@ function setupLease(){
   //console.log(button)
   document.getElementById("button_container").appendChild(button);
   //console.log(document.getElementById("button_container"))
+}
+
+function onSetupAuction(){
+
+
+  var create_textfields = document.getElementById("text_fields");
+  create_textfields.innerHTML = "<label>Property Id</label>"
+  document.getElementById("time").innerHTML=""
+  document.getElementById("button_container").innerHTML=""
+  var text_field = document.createElement("input");
+  text_field.id="property_id"
+  text_field.type="text"
+  text_field.placeholder="Property ID"
+  text_field.value=propertyObject.id;
+  text_field.disabled=true;
+  console.log(create_textfields)
+  console.log(text_field)
+  create_textfields.appendChild(text_field);
+
+  var text_field1 = document.createElement("input");
+  text_field1.id="amount"
+  text_field1.type="text"
+  text_field1.placeholder="Bid Amount"
+  //text_field1.value=propertyObject.id;
+  create_textfields.appendChild(text_field1);
+
+  var button = document.createElement("button")
+  button.className="button success medium-12"
+  button.innerHTML="Place Bid"
+  button.setAttribute("onclick","onButtonPropertyAuction()");
+  document.getElementById("button_container").appendChild(button); 
+  //viewBids(document.getElementById("property_id").value);
+  viewBids(propertyObject.id);
 }
 
 function onButtonGetOwner()

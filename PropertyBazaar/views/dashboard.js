@@ -114,7 +114,7 @@ function onButtonGetProperties()
       //document.getElementById(id[i]).setAttribute("onclick",'showPropertyDetails('+id[i]+')')
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="View Details" style="margin-left:10px;margin-right:10px" onclick="showPropertyDetails('+id[i]+')">'
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Sell" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
-      document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
+      document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="End Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="AuctionResults('+id[i]+')">'
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Rent" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
       App.handle.getRented.call(id[i])
         .then(function(ifrented)
@@ -136,6 +136,29 @@ function onButtonGetProperties()
 function showPropertyDetails(pid){
   document.cookie = pid;
   document.location.href = "PropertyDetails?"
+}
+
+function AuctionResults(id_prop)
+{
+  //var prop_id=document.getElementById("prop_id").value;
+  var prop_id = id_prop;
+  App.handle.getAuctionWinner.call(prop_id)
+    .then(function(addr)
+      {alert("The property has gone to the highest bidder "+addr);
+
+        App.handle.getAuctionPrice.call(prop_id)
+        .then(function(val)
+          {
+            alert("The auction is successful at Rs. "+val);
+          })
+
+        App.handle.endAuction(prop_id,addr,{from:addr})
+        .then(function()
+        {
+          console.log("The auction has ended");
+        })
+
+    })
 }
 
 $(function() {
