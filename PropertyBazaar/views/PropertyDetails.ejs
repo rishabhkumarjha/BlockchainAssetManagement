@@ -204,11 +204,12 @@
       <br><br>
       <div class="row">
       <div class="medium-6 medium-centered columns">
-        <div class="medium-12 medium-centered column">
+        <div id="radio_buttons_field" class="medium-12 medium-centered column">
         <fieldset>
           <input type="radio" onclick="setupBuy()" name="action" value="buy" id="buy_radio"><label for="buy_radio">Buy Property</label>
           <input type="radio" onclick="setupLease()" name="action" value="rent" id="rent_radio"><label for="rent_radio">Rent Property</label>
-          <input type="radio" onclick="onSetupAuction()" name="action" value="auction" id="auction_radio"><label for="auction_radio">Place Bid</label>
+          <!-- <input type="radio" onclick="onSetupAuction()" name="action" value="auction" id="auction_radio"><label for="auction_radio">Place Bid</label> -->
+
         </fieldset>
         </div>
       </div>
@@ -222,6 +223,13 @@
         <div id="time">
         </div>
         <div id="button_container" class="medium-12 column">
+        </div>
+        <div id = "table_container" class="medium-12 column">
+          <div>
+            <table id = "table">
+              
+            </table>
+          </div>
         </div>
       </div>
     </div>

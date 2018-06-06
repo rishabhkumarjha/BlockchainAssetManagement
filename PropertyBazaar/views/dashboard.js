@@ -99,6 +99,30 @@ function getAccountDetails(){
   
 }
 
+function checkAuctionStatus(prop_id)
+{
+  
+  App.handle.getAuctioned.call(prop_id)
+  .then(function(status)
+  {
+    console.log(status);
+    return status;
+    
+
+  });
+
+}
+
+function startAuctionJs(prop_id)
+{
+  App.handle.startAuction(prop_id)
+  .then(function(status)
+  {
+    console.log("is_auctioned is set true");
+    location.reload();
+  });
+}
+
 function onButtonGetProperties()
 {
   var acc=App.account;
@@ -114,7 +138,24 @@ function onButtonGetProperties()
       //document.getElementById(id[i]).setAttribute("onclick",'showPropertyDetails('+id[i]+')')
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="View Details" style="margin-left:10px;margin-right:10px" onclick="showPropertyDetails('+id[i]+')">'
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Sell" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
-      document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="End Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="AuctionResults('+id[i]+')">'
+
+      App.handle.getAuctioned.call(id[i])
+      .then(function(status)
+      {
+        if(status[1]==true)
+        {
+          console.log("marker "+status[0]);
+          document.getElementById(status[0]).innerHTML += '<input class="std-button" type=button value="End Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+status[0]+'_sell_button" onclick="AuctionResults('+id[i]+')">'
+
+        }
+
+        else
+        {
+          console.log("marker false"+status[1])
+           document.getElementById(String(status[0])).innerHTML += '<input class="std-button" type=button value="Start Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="startAuctionJs('+status[0]+')">'
+        }
+      });
+
       document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Rent" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="putOnSale('+id[i]+')">'
       App.handle.getRented.call(id[i])
         .then(function(ifrented)
@@ -128,7 +169,7 @@ function onButtonGetProperties()
               console.log("pids : " + pids[i])
               document.getElementById(id[i]).innerHTML += '<input class="std-button" type=button value="Rent" background-color="green" style="margin-left:10px;margin-right:10px" onclick="putOnRent('+id[i]+')">';
             }
-          })/*.wait()*/;
+          });/*.wait()*/;
     }
   })
 }

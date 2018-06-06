@@ -12,10 +12,10 @@ contract Adoption {
    mapping(uint=>uint) public auction_amount;
    mapping(uint=>address) public auction_owner;
    mapping(address=>uint) public bidding_price_map;
-//uint[] public bid_prices;
-//address[] public bid_amount;
-mapping(uint=>uint[]) public bid_prices;
-mapping(uint=>address[]) public bid_account;
+   mapping(uint=>uint[]) public bid_prices;
+   mapping(uint=>address[]) public bid_account;
+
+   mapping(uint=>bool) public is_auctioned;
    //mapping(uint=>mapping(address=>uint)) public pid_to_account_to_price_map;
 
    struct Name  //rename it as User_info
@@ -53,6 +53,11 @@ function addProperty(address owner, uint propid,string first_name,string last_na
         }
         
     }
+
+function getAuctioned(uint prop_id) public view returns (uint,bool)
+{
+  return (prop_id,is_auctioned[prop_id]);
+}
 
 function getList(uint prop_id) public view returns (uint[],address[])
 {
@@ -185,12 +190,15 @@ function leasePropertyStart(address owner,address renter,uint prop_id,uint years
             
     }
 
-
+function startAuction(uint prop_id) public
+{
+  is_auctioned[prop_id]=true;
+}
 
 function auction(address account,uint prop_id,uint price) public 
 {
 
-
+  //is_auctioned[prop_id]=true;
   uint base_amount=account_to_user_name[account].amount;  //the amount the sender expects for the property while registering
   if(price>=base_amount)
   {
@@ -211,6 +219,7 @@ function endAuction(uint prop_id,address account) public
 {
   address owner=pid_to_address_map[prop_id];
   buyProperty(owner,account,prop_id);
+  is_auctioned[prop_id]=false;
 }
 
 

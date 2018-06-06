@@ -16,6 +16,9 @@ $.getJSON('../Properties.json', function(data) {
       propertyObject = data[i];
       console.log(propertyObject);
     });
+
+
+
 function viewDetails() {
    //console.log(snapshot.val());
    document.getElementById('propertySrc').src=propertyObject.picture;

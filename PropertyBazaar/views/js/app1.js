@@ -38,6 +38,8 @@ App =
             App.contracts.Adoption.deployed().then(function(instance) {
     App.handle = instance;
     console.log("deployed");
+    onSetupRadioAuction();
+    console.log("done");
 
  
 
@@ -47,6 +49,18 @@ App =
     }
 
 };
+
+function onSetupRadioAuction(){
+  console.log("setup");
+  App.handle.getAuctioned.call(propertyObject.id)
+  .then(function(status)
+  {
+    if(status[1]==true)
+    {
+      document.getElementById("radio_buttons_field").innerHTML += '<input type="radio" onclick="onSetupAuction()" name="action" value="auction" id="auction_radio"><label for="auction_radio">Place Bid</label>'
+    }
+  });
+}
 
 function onButtonAdd(prop)  //for add property to blockchain button
 {
@@ -388,8 +402,12 @@ function onButtonPropertyAuction()
       account = accounts[0];
       console.log(account);
     
-
-  App.handle.auction(account,prop_id,amount,{from:account})
+App.handle.getAddress.call(prop_id)
+  .then(function(addr2)
+  {
+      if(addr2!=account)
+      {
+          App.handle.auction(account,prop_id,amount,{from:account})
                   .then(function()
                     {
                       console.log("your value is noted");
@@ -412,9 +430,22 @@ function onButtonPropertyAuction()
                         {
                           console.log(result[1][i]);
                         }
+                        viewBids(prop_id);
                       })
                     }
-                  )
+                  ) 
+          
+      }
+
+      else
+      {
+        alert("You can't auction your own property");
+      }
+
+  });
+
+    
+
     });
 
    //setTimeout(AuctionResults.bind(null,prop_id),timeOut*1000);
@@ -444,27 +475,38 @@ function AuctionResults(id_prop)
     })
 }
 
+function checkAuctionStatus(prop_id)
+{
+  App.handle.getAuctioned.call(prop_id)
+  .then(function(status)
+  {
+    console.log(status);
+    return status;
+
+  });
+}
+
 function viewBids(prop_id){
   var pid = prop_id;
   App.handle.getList.call(pid)
                       .then(function(result)
                       {
                         console.log(result[0]);
-                        
+                        document.getElementById("table").innerHTML = ""
                         for(var i=0;i<result[1].length;i++)
                         {
                           console.log(result[1][i]);
                           if(i==0){
-                            document.getElementById("button_container").innerHTML +="<table><tr><th>Account</th><th>Bid</th></tr>"
+                            document.getElementById("table").innerHTML +="<tr><th>Account</th><th>Bid</th></tr>"
                           }
                           // document.getElementById("text_fields").innerHTML +="<tr>"
                           // document.getElementById("text_fields").innerHTML +="<td>"+ /*result[1][i]+*/"k" + "</td>"
                           // document.getElementById("text_fields").innerHTML +="<td>"+ /*result[0][i]["c"][0]+*/ "h" + "</td>"
                           // document.getElementById("text_fields").innerHTML +="</tr>"
-                          document.getElementById("button_container").innerHTML +="<tr><td>"+result[1][i]+"</td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+result[0][i]["c"][0]+"</td></tr><br>"
-                          if(i==result[1].length-1){
-                          document.getElementById("button_container").innerHTML +="</table>"
-                          }
+                          document.getElementById("table").innerHTML +="<tr><td>"+result[1][i]+"</td><td>"+result[0][i]["c"][0]+"</td></tr>"
+                          //if(i==result[1].length-1){
+                          //document.getElementById("button_container").innerHTML +="</table>"
+                          //}
                         }
                         
                         for(var i=0;i<result[0].length;i++)
@@ -478,6 +520,7 @@ function viewBids(prop_id){
 }
 
 function setupBuy(){
+  document.getElementById("table").innerHTML = ""
   var create_textfields = document.getElementById("text_fields");
   create_textfields.innerHTML = "<label>Property Id</label>"
   document.getElementById("time").innerHTML=""
@@ -527,6 +570,7 @@ function setupRegister(){
 }
 
 function setupLease(){
+  document.getElementById("table").innerHTML = ""
   var create_textfields = document.getElementById("text_fields");
   create_textfields.innerHTML="<label>Property Id</label>"
   document.getElementById("time").innerHTML=""
@@ -550,9 +594,12 @@ function setupLease(){
   //console.log(document.getElementById("button_container"))
 }
 
+
+
+
 function onSetupAuction(){
 
-
+  
   var create_textfields = document.getElementById("text_fields");
   create_textfields.innerHTML = "<label>Property Id</label>"
   document.getElementById("time").innerHTML=""
