@@ -145,14 +145,14 @@ function onButtonGetProperties()
         if(status[1]==true)
         {
           console.log("marker "+status[0]);
-          document.getElementById(status[0]).innerHTML += '<input class="std-button" type=button value="End Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+status[0]+'_sell_button" onclick="AuctionResults('+id[i]+')">'
+          document.getElementById(status[0]).innerHTML += '<input class="std-button" type=button value="End Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+status[0]+'_sell_button" onclick="AuctionResults('+status[0]+')">'
 
         }
 
         else
         {
           console.log("marker false"+status[1])
-           document.getElementById(String(status[0])).innerHTML += '<input class="std-button" type=button value="Start Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+id[i]+'_sell_button" onclick="startAuctionJs('+status[0]+')">'
+           document.getElementById(String(status[0])).innerHTML += '<input class="std-button" type=button value="Start Auction" background-color="green" style="margin-left:10px;margin-right:10px" id="'+status[0]+'_sell_button" onclick="startAuctionJs('+status[0]+')">'
         }
       });
 
@@ -193,7 +193,7 @@ function AuctionResults(id_prop)
             alert("The auction is successful at Rs. "+val);
           })
 
-        App.handle.endAuction(prop_id,addr,{from:addr})
+        App.handle.endAuction(prop_id,addr)
         .then(function()
         {
           console.log("The auction has ended");
