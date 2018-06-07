@@ -32,12 +32,12 @@
 
           <div class = "columns medium-6">
           <label>Owner First Name</label>
-          <input name = "fname" type="text" placeholder="First Name" required>
+          <input name = "fname" id = "fname" type="text" placeholder="First Name" required>
         </div>
 
         <div class = "columns medium-6">
           <label>Owner Last Name</label>
-          <input name = "lname" type="text" placeholder="Last Name" required>
+          <input name = "lname" id = "lname" type="text" placeholder="Last Name" required>
         </div>
 
         <div class = "columns medium-6">
@@ -47,17 +47,17 @@
 
         <div class = "columns medium-6">
           <label>Property Title</label>
-          <input name = "title" type="text" placeholder="Property Title" required>
+          <input name = "title" type="text" id = "title" placeholder="Property Title" required>
         </div>
 
         <div class = "columns medium-12">
           <label>Overview</label>
-          <input name = "overview" type="text" />
+          <input name = "overview" id = "overview" type="text" />
         </div>
 
         <div class = "columns medium-6">
           <label>Type</label>
-          <select name = "type" required>
+          <select name = "type" id = "type" required>
   			<option value="1 BHK">1 BHK</option>
   			<option value="2 BHK">2 BHK</option>
   			<option value="3 BHK">3 BHK</option>
@@ -85,15 +85,15 @@
           <legend>Location</legend>
           <div class = "columns medium-4">
           	<label>Street</label>
-          	<input name = "street" type="text" placeholder="Street" required>
+          	<input name = "street" id = "street" type="text" placeholder="Street" required>
           </div>
           <div class = "columns medium-4">
           	<label>City</label>
-          	<input name = "city" type="text" placeholder="City" required>
+          	<input name = "city" id = "city" type="text" placeholder="City" required>
           </div>
           <div class = "columns medium-4">
           	<label>State</label>
-          	<input name = "state" type="text" placeholder="State" required>
+          	<input name = "state" id = "state" type="text" placeholder="State" required>
           </div>
         </fieldset>
 
@@ -149,8 +149,13 @@
 
 
 
-        <div class="columns medium-6">
-        	<button id = "submitButton" class="button expanded large">Submit</button>
+        <div class="columns medium-12">
+        	<div class = "columns medium-6">
+        		<button id = "AutoButton" class="button expanded large" onclick = "AutoFunction()" >Auto Fill</button>
+        	</div>
+        	<div class = "columns medium-6">
+        		<button id = "submitButton" class="button expanded large">Submit</button>
+        	</div>
         </div>
     </form>
 
