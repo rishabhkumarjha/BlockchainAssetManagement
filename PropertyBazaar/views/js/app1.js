@@ -694,9 +694,9 @@ function onButtonGetCOC()
             console.log("displaying" + result[2])
             //document.getElementById(i).innerHTML += '<div class=""><div class="content">' + result[0]+" "+result[1]+" "+result[2] +'</div></div>'
             //document.getElementById(result[2]).innerHTML += '<div class=""><div class="content">' + result[0]+" "+ result[1] + " "+result[2] +'</div></div><br><br><br>'
-            var nodeList = document.getElementsByClassName(result[2]);
+            var nodeList = document.getElementsByClassName(result[3]);
             for(var j=0;j<nodeList.length;j++){
-              document.getElementsByClassName(result[2])[j].innerHTML = result[0] + " " +result[1]
+              document.getElementsByClassName(result[3])[j].innerHTML = result[0] + " " +result[1]
             }
             //document.getElementById("container_timeline").innerHTML += '<div class="container right"><div class="content">' + first_name + '</div></div>'
           });
