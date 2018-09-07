@@ -1,4 +1,8 @@
+# Introduction
+The contemporary system uses database as the datasource for carrying out transactions, we propose to replace the centralized databases with decentralized peer to peer blockchain network to carry out the transactions.
 
+# Use Cases
+This blockchain based asset management product can be used to carry out asset transactions like buy, sell, lease or auction properties,tangible or non tangibles. 
 
 # Installation
 1. Clone this repository and extract it to a folder lets call it BlockchainAssetManagement
